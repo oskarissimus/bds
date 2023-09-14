@@ -108,6 +108,10 @@
 			]
 		},
 		{
+			"match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(\\[\\])?(?=\\s+[A-Za-z_][A-Za-z0-9_]*;)",
+			"name": "entity.name.type.class.bds"
+		},
+		{
 			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?![\\s]*\\()",
 			"name": "variable.bds"
 		},
