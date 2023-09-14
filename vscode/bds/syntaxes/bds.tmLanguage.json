@@ -2,6 +2,14 @@
 	"name": "BDS",
 	"patterns": [
 		{
+			"match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
+			"name": "constant.numeric.float.bds"
+		},
+		{
+			"match": "\\b-?\\d+",
+			"name": "constant.numeric.integer.bds"
+		},
+		{
 			"begin": "\\bclass\\b",
 			"end": "\\s+([A-Za-z_][A-Za-z0-9_]*)",
 			"beginCaptures": {
@@ -100,12 +108,23 @@
 			]
 		},
 		{
-			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*\\(.*\\)",
-			"captures": {
+			"begin": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+			"end": "\\)",
+			"beginCaptures": {
 				"1": {
 					"name": "entity.name.function.call.bds"
 				}
-			}
+			},
+			"patterns": [
+				{
+					"match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
+					"name": "constant.numeric.float.bds"
+				},
+				{
+					"match": "\\b-?\\d+",
+					"name": "constant.numeric.integer.bds"
+				}
+			]
 		}
 	],
 	"repository": {},
