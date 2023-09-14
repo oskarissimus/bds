@@ -16,7 +16,7 @@
 			}
 		},
 		{
-			"begin": "\\b(bool|int|real|string|void)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*(\\()",
+			"begin": "\\b(bool|int|real|string|void)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
 			"end": "\\)",
 			"beginCaptures": {
 				"1": {
@@ -24,14 +24,6 @@
 				},
 				"2": {
 					"name": "entity.name.function.bds"
-				},
-				"3": {
-					"name": "punctuation.paren.open.bds"
-				}
-			},
-			"endCaptures": {
-				"0": {
-					"name": "punctuation.paren.close.bds"
 				}
 			},
 			"patterns": [
