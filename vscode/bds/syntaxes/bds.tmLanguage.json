@@ -24,6 +24,20 @@
 			}
 		},
 		{
+			"begin": "\\bextends\\b\\s+",
+			"end": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.control.inheritance.bds"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "entity.name.class.inherited.bds"
+				}
+			}
+		},
+		{
 			"begin": "\\b(bool|int|real|string|void)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
 			"end": "\\)",
 			"beginCaptures": {
