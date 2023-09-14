@@ -58,5 +58,8 @@
         "testMatch": [
             "**/src/**/*.test.(ts|js)"
         ]
+    },
+    "dependencies": {
+        "antlr4": "^4.13.1"
     }
 }
