@@ -131,6 +131,36 @@
 				{
 					"match": "\\b-?\\d+",
 					"name": "constant.numeric.integer.bds"
+				},
+				{
+					"match": "[A-Za-z_][A-Za-z0-9_]*",
+					"name": "variable.parameter.function.call.bds"
+				},
+				{
+					"begin": "\"",
+					"end": "\"",
+					"name": "string.quoted.double.function.parameter.bds",
+					"patterns": [
+						{
+							"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+							"name": "variable.interpolation.bds"
+						}
+					]
+				},
+				{
+					"begin": "'",
+					"end": "'",
+					"name": "string.quoted.single.function.parameter.bds",
+					"patterns": [
+						{
+							"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+							"name": "variable.interpolation.bds"
+						}
+					]
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.parameter.bds"
 				}
 			]
 		}
