@@ -50,7 +50,15 @@
 			]
 		},
 		{
-			"match": "\\b(bool|int|real|string|void|true|false|null|extends|if|else|for|while|try|catch|finally|throw|return|break|breakpoint|checkpoint|debug|exit|print|println|warning|error|kill|wait|switch|task|dep|goal|par|parallel|continue)\\b",
+			"match": "\\b(bool|int|real|string|void)\\b",
+			"name": "entity.name.type.bds"
+		},
+		{
+			"match": "\\b(true|false)\\b",
+			"name": "constant.language.boolean.bds"
+		},
+		{
+			"match": "\\b(null|extends|if|else|for|while|try|catch|finally|throw|return|break|breakpoint|checkpoint|debug|exit|print|println|warning|error|kill|wait|switch|task|dep|goal|par|parallel|continue)\\b",
 			"name": "keyword.control.bds"
 		},
 		{
