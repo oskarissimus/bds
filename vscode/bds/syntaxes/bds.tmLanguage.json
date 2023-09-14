@@ -76,6 +76,36 @@
 					"name": "entity.name.class.instantiation.bds"
 				}
 			}
+		},
+		{
+			"begin": "\"",
+			"end": "\"",
+			"name": "string.quoted.double.bds",
+			"patterns": [
+				{
+					"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+					"name": "variable.interpolation.bds"
+				}
+			]
+		},
+		{
+			"begin": "'",
+			"end": "'",
+			"name": "string.quoted.single.bds",
+			"patterns": [
+				{
+					"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+					"name": "variable.interpolation.bds"
+				}
+			]
+		},
+		{
+			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*\\(.*\\)",
+			"captures": {
+				"1": {
+					"name": "entity.name.function.call.bds"
+				}
+			}
 		}
 	],
 	"repository": {},
