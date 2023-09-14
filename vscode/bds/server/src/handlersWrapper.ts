@@ -16,6 +16,8 @@ import { getLocationByType } from "./symbolLocation";
 import { WorkspaceIndexer } from "./fileIndexer";
 import { IndexType, SymbolIndex } from "./symbolIndex";
 import { DocumentParser } from "./defaultDocumentParser";
+import { getSymbolFromTokens } from "./symbolFinder";
+import { SymbolTable } from "./symbolTable";
 
 class HandlersWrapper {
   private clientCapabilities: ClientCapabilities = {};
@@ -63,17 +65,30 @@ class HandlersWrapper {
   }
 
   handleDefinition(textDocumentPosition: DefinitionParams): Definition | null {
+    // console.log("papiezatti");
     const document: TextDocument | undefined = this.documents.get(
       textDocumentPosition.textDocument.uri
     );
-    return document
-      ? getLocationByType(
-          document,
-          textDocumentPosition.position,
-          this.symbolindex,
-          IndexType.Definition
-        )
-      : null;
+    // console.log(document);
+    if (!document) {
+      return null;
+    }
+    const code = document.getText();
+    // console.log(code);
+    const symbol = getSymbolFromTokens(code, textDocumentPosition.position);
+    // console.log(symbol);
+    if (!symbol) {
+      return null;
+    }
+    const symbolTable = new SymbolTable(code);
+    const symbolRange = symbolTable.get(symbol);
+    if (!symbolRange) {
+      return null;
+    }
+    return {
+      uri: textDocumentPosition.textDocument.uri,
+      range: symbolRange,
+    };
   }
 
   handleReferences(textDocumentPosition: ReferenceParams): Location[] | null {
