@@ -65,6 +65,17 @@
 		{
 			"match": "\\b(include)\\b",
 			"name": "keyword.declaration.bds"
+		},
+		{
+			"match": "\\bnew\\b\\s+([A-Za-z_][A-Za-z0-9_]*)",
+			"captures": {
+				"0": {
+					"name": "keyword.control.new.bds"
+				},
+				"1": {
+					"name": "entity.name.class.instantiation.bds"
+				}
+			}
 		}
 	],
 	"repository": {},
