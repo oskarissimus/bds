@@ -7,7 +7,8 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 import { promises as fs } from "fs";
 import { fileURLToPath } from "url";
 import { glob } from "glob";
-import { SymbolDefinitionsTable } from "./symbolDefinitions";
+import { SymbolDefinitionTable } from "./symbolDefinition";
+import { SymbolReferenceTable } from "./symbolReference";
 
 type FileData = {
   path: string;
@@ -17,7 +18,8 @@ export class WorkspaceIndexer {
   constructor(
     private workspace: RemoteWorkspace,
     private supportsWorkspaceFolders: boolean | undefined,
-    private symbolTable: SymbolDefinitionsTable,
+    private symbolDefinitionTable: SymbolDefinitionTable,
+    private symbolReferenceTable: SymbolReferenceTable,
     private connection: Connection
   ) {}
 
@@ -109,7 +111,8 @@ export class WorkspaceIndexer {
   private indexFiles(documents: TextDocument[]): void {
     documents.forEach((document) => {
       console.log(`Indexing document ${document.uri}...`);
-      this.symbolTable.indexDocument(document);
+      this.symbolDefinitionTable.indexDocument(document);
+      this.symbolReferenceTable.indexDocument(document);
     });
   }
 }
