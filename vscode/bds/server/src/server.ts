@@ -5,11 +5,11 @@ import {
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import HandlersWrapper from "./handlersWrapper";
-import { SymbolTable } from "./symbolTable";
+import { SymbolDefinitionsTable } from "./symbolDefinitions";
 
 const connection = createConnection(ProposedFeatures.all);
 const documents = new TextDocuments(TextDocument);
-const symbolTable = new SymbolTable();
+const symbolTable = new SymbolDefinitionsTable();
 
 const requestHandler = new HandlersWrapper(connection, documents, symbolTable);
 

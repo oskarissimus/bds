@@ -11,20 +11,19 @@ import {
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { WorkspaceIndexer } from "./fileIndexer";
-import { DocumentParser } from "./defaultDocumentParser";
 import { getSymbolFromTokens } from "./symbolFinder";
-import { SymbolTable } from "./symbolTable";
+import { SymbolDefinitionsTable } from "./symbolDefinitions";
 
 class HandlersWrapper {
   private clientCapabilities: ClientCapabilities = {};
   private connection: Connection;
   private documents: TextDocuments<TextDocument>;
-  private symbolTable: SymbolTable;
+  private symbolTable: SymbolDefinitionsTable;
 
   constructor(
     connection: Connection,
     documents: TextDocuments<TextDocument>,
-    symbolTable: SymbolTable
+    symbolTable: SymbolDefinitionsTable
   ) {
     this.connection = connection;
     this.documents = documents;

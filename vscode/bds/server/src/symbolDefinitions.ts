@@ -46,7 +46,7 @@ class SymbolDefinitionListener extends bdsListener {
   }
 }
 
-export class SymbolTable {
+export class SymbolDefinitionsTable {
   private symbols: Map<string, Location>;
   constructor() {
     this.symbols = new Map();

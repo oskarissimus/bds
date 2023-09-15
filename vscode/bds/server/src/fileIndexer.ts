@@ -7,7 +7,7 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 import { promises as fs } from "fs";
 import { fileURLToPath } from "url";
 import { glob } from "glob";
-import { SymbolTable } from "./symbolTable";
+import { SymbolDefinitionsTable } from "./symbolDefinitions";
 
 type FileData = {
   path: string;
@@ -17,7 +17,7 @@ export class WorkspaceIndexer {
   constructor(
     private workspace: RemoteWorkspace,
     private supportsWorkspaceFolders: boolean | undefined,
-    private symbolTable: SymbolTable,
+    private symbolTable: SymbolDefinitionsTable,
     private connection: Connection
   ) {}
 
