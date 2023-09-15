@@ -2,31 +2,13 @@
     "name": "BDS",
     "patterns": [
         {
+            "include": "#newKeyword"
+        },
+        {
             "include": "#keywordSpecial"
         },
         {
             "include": "#keywordThis"
-        },
-        {
-            "include": "#numericFloat"
-        },
-        {
-            "include": "#numericInteger"
-        },
-        {
-            "include": "#classDefinition"
-        },
-        {
-            "include": "#extendsDefinition"
-        },
-        {
-            "include": "#functionDefinition"
-        },
-        {
-            "include": "#basicTypes"
-        },
-        {
-            "include": "#classTypes"
         },
         {
             "include": "#booleanConstants"
@@ -53,7 +35,25 @@
             "include": "#includeKeyword"
         },
         {
-            "include": "#newKeyword"
+            "include": "#numericFloat"
+        },
+        {
+            "include": "#numericInteger"
+        },
+        {
+            "include": "#classDefinition"
+        },
+        {
+            "include": "#extendsDefinition"
+        },
+        {
+            "include": "#functionDefinition"
+        },
+        {
+            "include": "#basicTypes"
+        },
+        {
+            "include": "#classTypes"
         },
         {
             "include": "#doubleQuotedString"
