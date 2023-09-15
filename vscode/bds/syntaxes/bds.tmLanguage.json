@@ -2,6 +2,12 @@
     "name": "BDS",
     "patterns": [
         {
+            "include": "#doubleQuotedString"
+        },
+        {
+            "include": "#singleQuotedString"
+        },
+        {
             "include": "#newKeyword"
         },
         {
@@ -47,6 +53,9 @@
             "include": "#extendsDefinition"
         },
         {
+            "include": "#functionCall"
+        },
+        {
             "include": "#functionDefinition"
         },
         {
@@ -56,16 +65,7 @@
             "include": "#classTypes"
         },
         {
-            "include": "#doubleQuotedString"
-        },
-        {
-            "include": "#singleQuotedString"
-        },
-        {
             "include": "#variables"
-        },
-        {
-            "include": "#functionCall"
         }
     ],
     "repository": {
@@ -158,7 +158,8 @@
                     "include": "#numericInteger"
                 },
                 {
-                    "include": "#identifier"
+                    "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+                    "name": "variable.parameter.function.bds"
                 },
                 {
                     "include": "#doubleQuotedString"
@@ -213,7 +214,7 @@
             "name": "constant.language.null.bds"
         },
         "controlKeywords": {
-            "match": "\\b(extends|if|else|for|while|try|catch|finally|throw|return|break|breakpoint|checkpoint|debug|exit|print|println|warning|error|kill|wait|switch|task|dep|goal|par|parallel|continue)\\b",
+            "match": "\\b(if|else|for|while|try|catch|finally|throw|return|break|breakpoint|checkpoint|debug|exit|print|println|warning|error|kill|wait|switch|task|dep|goal|par|parallel|continue)\\b",
             "name": "keyword.control.bds"
         },
         "includeKeyword": {
