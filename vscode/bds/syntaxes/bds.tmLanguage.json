@@ -106,7 +106,7 @@
             }
         },
         "functionDefinition": {
-            "begin": "\\b(bool|int|real|string|void)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+            "begin": "\\b(?:(bool|int|real|string|void)\\b)?\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
             "end": "\\)",
             "beginCaptures": {
                 "1": {
