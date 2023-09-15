@@ -11,14 +11,15 @@ import bdsParser, {
   VariableInitImplicitContext,
 } from "./grammar/bdsParser";
 import bdsListener from "./grammar/bdsListener";
-import { Position, Range } from "vscode-languageserver";
+import { Location, Position, Range } from "vscode-languageserver";
+import { TextDocument } from "vscode-languageserver-textdocument";
 
 class SymbolDefinitionListener extends bdsListener {
-  symbolMap: Record<string, Range>;
+  symbols: Map<string, Range>;
 
   constructor() {
     super();
-    this.symbolMap = {};
+    this.symbols = new Map();
   }
 
   enterFunctionDeclaration = (ctx: FunctionDeclarationContext): void => {
@@ -41,31 +42,39 @@ class SymbolDefinitionListener extends bdsListener {
       symbol.line - 1,
       symbol.column + symbolName.length
     );
-    this.symbolMap[symbolName] = Range.create(start, end);
+    this.symbols.set(symbolName, Range.create(start, end));
   }
 }
 
 export class SymbolTable {
-  sourceCode: string;
-  symbolMap: Record<string, Range>;
-
-  constructor(sourceCode: string) {
-    this.sourceCode = sourceCode;
-    this.symbolMap = this._initializeSymbolMap();
+  private symbols: Map<string, Location>;
+  constructor() {
+    this.symbols = new Map();
   }
 
-  private _initializeSymbolMap(): Record<string, Range> {
-    const charStream = new CharStream(this.sourceCode);
+  public indexDocument(document: TextDocument): void {
+    const charStream = new CharStream(document.getText());
     const lexer = new bdsLexer(charStream);
     const tokens = new CommonTokenStream(lexer);
     const parser = new bdsParser(tokens);
     const listener = new SymbolDefinitionListener();
     const walker = new ParseTreeWalker();
     walker.walk(listener, parser.programUnit());
-    return listener.symbolMap;
+    this.symbols = mapRangesToLocations(document.uri, listener.symbols);
   }
 
-  get(symbol: string): Range | null {
-    return this.symbolMap[symbol] || null;
+  get(symbol: string): Location | null {
+    return this.symbols.get(symbol) ?? null;
   }
+}
+
+function mapRangesToLocations(
+  uri: string,
+  symbols: Map<string, Range>
+): Map<string, Location> {
+  const locations = new Map();
+  for (const [symbol, range] of symbols.entries()) {
+    locations.set(symbol, Location.create(uri, range));
+  }
+  return locations;
 }

@@ -65,30 +65,19 @@ class HandlersWrapper {
   }
 
   handleDefinition(textDocumentPosition: DefinitionParams): Definition | null {
-    // console.log("papiezatti");
     const document: TextDocument | undefined = this.documents.get(
       textDocumentPosition.textDocument.uri
     );
-    // console.log(document);
-    if (!document) {
-      return null;
-    }
+
+    if (!document) return null;
     const code = document.getText();
-    // console.log(code);
     const symbol = getSymbolFromTokens(code, textDocumentPosition.position);
-    // console.log(symbol);
-    if (!symbol) {
-      return null;
-    }
-    const symbolTable = new SymbolTable(code);
-    const symbolRange = symbolTable.get(symbol);
-    if (!symbolRange) {
-      return null;
-    }
-    return {
-      uri: textDocumentPosition.textDocument.uri,
-      range: symbolRange,
-    };
+    if (!symbol) return null;
+    const symbolTable = new SymbolTable();
+    symbolTable.indexDocument(document);
+    const symbolLocation = symbolTable.get(symbol);
+    if (!symbolLocation) return null;
+    return symbolLocation;
   }
 
   handleReferences(textDocumentPosition: ReferenceParams): Location[] | null {
