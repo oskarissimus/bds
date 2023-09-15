@@ -2,6 +2,10 @@
 	"name": "BDS",
 	"patterns": [
 		{
+			"match": "\\b(this)\\b",
+			"name": "keyword.this.bds"
+		},
+		{
 			"match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
 			"name": "constant.numeric.float.bds"
 		},

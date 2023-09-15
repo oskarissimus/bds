@@ -40,7 +40,17 @@
                 "scopeName": "source.bds",
                 "path": "./syntaxes/bds.tmLanguage.json"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "BDS Language Configuration",
+            "properties": {
+                "bds-extension.sourceRootDirectory": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Specify the source root directory for the BDS language server."
+                }
+            }
+        }
     },
     "devDependencies": {
         "@types/jest": "^29.5.3",
