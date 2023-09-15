@@ -75,7 +75,7 @@
 		},
 		"basicTypes": {
 			"match": "\\b(bool|int|real|string|void)\\b",
-			"name": "entity.name.type.bds"
+			"name": "storage.type.bds"
 		},
 		"classDefinition": {
 			"begin": "\\bclass\\b",
@@ -125,7 +125,8 @@
 					"name": "entity.name.type.class.bds"
 				},
 				{
-					"include": "#identifier"
+					"match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s*[,=\\)])",
+					"name": "variable.bds"
 				},
 				{
 					"match": ",",
