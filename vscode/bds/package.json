@@ -12,8 +12,9 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "tsc -b",
-        "watch": "tsc -b -w",
+        "merge-grammar": "node syntaxes/mergeGrammar.js",
+        "compile": "npm run merge-grammar && tsc -b",
+        "watch": "nodemon -e json --watch ./syntaxes --exec \"npm run merge-grammar\" & tsc -b -w",
         "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
         "test": "jest --coverage"
     },
