@@ -77,14 +77,6 @@
 			"match": "\\b(bool|int|real|string|void)\\b",
 			"name": "entity.name.type.bds"
 		},
-		"numericFloat": {
-			"match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
-			"name": "constant.numeric.float.bds"
-		},
-		"numericInteger": {
-			"match": "\\b-?\\d+",
-			"name": "constant.numeric.integer.bds"
-		},
 		"classDefinition": {
 			"begin": "\\bclass\\b",
 			"end": "\\s+([A-Za-z_][A-Za-z0-9_]*)",
@@ -144,49 +136,6 @@
 		"classTypes": {
 			"match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*)",
 			"name": "entity.name.type.class.bds"
-		},
-		"booleanConstants": {
-			"match": "\\b(true|false)\\b",
-			"name": "constant.language.boolean.bds"
-		},
-		"nullConstant": {
-			"match": "\\b(null)\\b",
-			"name": "constant.language.null.bds"
-		},
-		"blockComment": {
-			"begin": "/\\*",
-			"end": "\\*/",
-			"name": "comment.block.bds"
-		},
-		"lineComment": {
-			"match": "//.*",
-			"name": "comment.line.bds"
-		},
-		"lineHashComment": {
-			"match": "#.*",
-			"name": "comment.line.hash.bds"
-		},
-		"doubleQuotedString": {
-			"begin": "\"",
-			"end": "\"",
-			"name": "string.quoted.double.bds",
-			"patterns": [
-				{
-					"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
-					"name": "variable.interpolation.bds"
-				}
-			]
-		},
-		"singleQuotedString": {
-			"begin": "'",
-			"end": "'",
-			"name": "string.quoted.single.bds",
-			"patterns": [
-				{
-					"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
-					"name": "variable.interpolation.bds"
-				}
-			]
 		},
 		"variables": {
 			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?![\\s]*\\()",

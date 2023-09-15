@@ -1,0 +1,24 @@
+{
+    "doubleQuotedString": {
+        "begin": "\"",
+        "end": "\"",
+        "name": "string.quoted.double.bds",
+        "patterns": [
+            {
+                "match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+                "name": "variable.interpolation.bds"
+            }
+        ]
+    },
+    "singleQuotedString": {
+        "begin": "'",
+        "end": "'",
+        "name": "string.quoted.single.bds",
+        "patterns": [
+            {
+                "match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+                "name": "variable.interpolation.bds"
+            }
+        ]
+    }
+}
