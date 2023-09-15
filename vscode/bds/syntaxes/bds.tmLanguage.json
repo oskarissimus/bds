@@ -143,19 +143,28 @@
             "name": "variable.bds"
         },
         "functionCall": {
-            "begin": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+            "begin": "\\b(this)?\\.?([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
             "end": "\\)",
             "beginCaptures": {
                 "1": {
+                    "name": "variable.language.this.bds"
+                },
+                "2": {
                     "name": "entity.name.function.call.bds"
                 }
             },
             "patterns": [
                 {
+                    "include": "#keywordThis"
+                },
+                {
                     "include": "#numericFloat"
                 },
                 {
                     "include": "#numericInteger"
+                },
+                {
+                    "include": "#functionCall"
                 },
                 {
                     "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
