@@ -2,22 +2,98 @@
 	"name": "BDS",
 	"patterns": [
 		{
+			"include": "#keywordSpecial"
+		},
+		{
+			"include": "#keywordThis"
+		},
+		{
+			"include": "#numericFloat"
+		},
+		{
+			"include": "#numericInteger"
+		},
+		{
+			"include": "#classDefinition"
+		},
+		{
+			"include": "#extendsDefinition"
+		},
+		{
+			"include": "#functionDefinition"
+		},
+		{
+			"include": "#basicTypes"
+		},
+		{
+			"include": "#classTypes"
+		},
+		{
+			"include": "#booleanConstants"
+		},
+		{
+			"include": "#nullConstant"
+		},
+		{
+			"include": "#controlKeywords"
+		},
+		{
+			"include": "#blockComment"
+		},
+		{
+			"include": "#lineComment"
+		},
+		{
+			"include": "#lineHashComment"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#includeKeyword"
+		},
+		{
+			"include": "#newKeyword"
+		},
+		{
+			"include": "#doubleQuotedString"
+		},
+		{
+			"include": "#singleQuotedString"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#functionCall"
+		}
+	],
+	"repository": {
+		"identifier": {
+			"match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+			"name": "identifier.bds"
+		},
+		"basicTypes": {
+			"match": "\\b(bool|int|real|string|void)\\b",
+			"name": "entity.name.type.bds"
+		},
+		"keywordSpecial": {
 			"match": "\\bsuper\\b",
 			"name": "keyword.special.super.bds"
 		},
-		{
+		"keywordThis": {
 			"match": "\\b(this)\\b",
 			"name": "keyword.this.bds"
 		},
-		{
+		"numericFloat": {
 			"match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
 			"name": "constant.numeric.float.bds"
 		},
-		{
+		"numericInteger": {
 			"match": "\\b-?\\d+",
 			"name": "constant.numeric.integer.bds"
 		},
-		{
+		"classDefinition": {
 			"begin": "\\bclass\\b",
 			"end": "\\s+([A-Za-z_][A-Za-z0-9_]*)",
 			"beginCaptures": {
@@ -31,7 +107,7 @@
 				}
 			}
 		},
-		{
+		"extendsDefinition": {
 			"begin": "\\bextends\\b\\s+",
 			"end": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b",
 			"beginCaptures": {
@@ -45,7 +121,7 @@
 				}
 			}
 		},
-		{
+		"functionDefinition": {
 			"begin": "\\b(bool|int|real|string|void)\\b\\s+([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
 			"end": "\\)",
 			"beginCaptures": {
@@ -58,16 +134,14 @@
 			},
 			"patterns": [
 				{
-					"match": "\\b(bool|int|real|string|void)\\b",
-					"name": "storage.type.parameter.bds"
+					"include": "#basicTypes"
 				},
 				{
 					"match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*[,\\)])",
 					"name": "entity.name.type.class.bds"
 				},
 				{
-					"match": "[A-Za-z_][A-Za-z0-9_]*",
-					"name": "variable.parameter.bds"
+					"include": "#identifier"
 				},
 				{
 					"match": ",",
@@ -75,48 +149,44 @@
 				}
 			]
 		},
-		{
-			"match": "\\b(bool|int|real|string|void)\\b",
-			"name": "entity.name.type.bds"
-		},
-		{
+		"classTypes": {
 			"match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*[,;\\)])",
 			"name": "entity.name.type.class.bds"
 		},
-		{
+		"booleanConstants": {
 			"match": "\\b(true|false)\\b",
 			"name": "constant.language.boolean.bds"
 		},
-		{
+		"nullConstant": {
 			"match": "\\b(null)\\b",
 			"name": "constant.language.null.bds"
 		},
-		{
+		"controlKeywords": {
 			"match": "\\b(extends|if|else|for|while|try|catch|finally|throw|return|break|breakpoint|checkpoint|debug|exit|print|println|warning|error|kill|wait|switch|task|dep|goal|par|parallel|continue)\\b",
 			"name": "keyword.control.bds"
 		},
-		{
+		"blockComment": {
 			"begin": "/\\*",
 			"end": "\\*/",
 			"name": "comment.block.bds"
 		},
-		{
+		"lineComment": {
 			"match": "//.*",
 			"name": "comment.line.bds"
 		},
-		{
+		"lineHashComment": {
 			"match": "#.*",
 			"name": "comment.line.hash.bds"
 		},
-		{
+		"operators": {
 			"match": "[-+*/%&|<>!=]|\\+\\+|--|\\|=|&=|/=|\\*=|-=|\\+=|:=|<-|=>",
 			"name": "keyword.operator.bds"
 		},
-		{
+		"includeKeyword": {
 			"match": "\\b(include)\\b",
 			"name": "keyword.declaration.bds"
 		},
-		{
+		"newKeyword": {
 			"match": "\\bnew\\b\\s+([A-Za-z_][A-Za-z0-9_]*)",
 			"captures": {
 				"0": {
@@ -127,7 +197,7 @@
 				}
 			}
 		},
-		{
+		"doubleQuotedString": {
 			"begin": "\"",
 			"end": "\"",
 			"name": "string.quoted.double.bds",
@@ -138,7 +208,7 @@
 				}
 			]
 		},
-		{
+		"singleQuotedString": {
 			"begin": "'",
 			"end": "'",
 			"name": "string.quoted.single.bds",
@@ -149,15 +219,11 @@
 				}
 			]
 		},
-		{
-			"match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*[,\\)])",
-			"name": "entity.name.type.class.bds"
-		},
-		{
+		"variables": {
 			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?![\\s]*\\()",
 			"name": "variable.bds"
 		},
-		{
+		"functionCall": {
 			"begin": "\\b([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
 			"end": "\\)",
 			"beginCaptures": {
@@ -167,38 +233,19 @@
 			},
 			"patterns": [
 				{
-					"match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
-					"name": "constant.numeric.float.bds"
+					"include": "#numericFloat"
 				},
 				{
-					"match": "\\b-?\\d+",
-					"name": "constant.numeric.integer.bds"
+					"include": "#numericInteger"
 				},
 				{
-					"match": "[A-Za-z_][A-Za-z0-9_]*",
-					"name": "variable.parameter.function.call.bds"
+					"include": "#identifier"
 				},
 				{
-					"begin": "\"",
-					"end": "\"",
-					"name": "string.quoted.double.function.parameter.bds",
-					"patterns": [
-						{
-							"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
-							"name": "variable.interpolation.bds"
-						}
-					]
+					"include": "#doubleQuotedString"
 				},
 				{
-					"begin": "'",
-					"end": "'",
-					"name": "string.quoted.single.function.parameter.bds",
-					"patterns": [
-						{
-							"match": "\\$[A-Za-z_][A-Za-z0-9_]*",
-							"name": "variable.interpolation.bds"
-						}
-					]
+					"include": "#singleQuotedString"
 				},
 				{
 					"match": ",",
@@ -206,7 +253,6 @@
 				}
 			]
 		}
-	],
-	"repository": {},
+	},
 	"scopeName": "source.bds"
 }
