@@ -3,7 +3,6 @@ import bdsLexer from "./grammar/bdsLexer";
 import { Position } from "vscode-languageserver";
 
 export function getAllTokens(sourceCode: string): Token[] {
-  console.log(sourceCode);
   const charStream = new CharStream(sourceCode);
   const lexer = new bdsLexer(charStream);
   const tokens = lexer.getAllTokens();

@@ -60,7 +60,8 @@ export class SymbolTable {
     const listener = new SymbolDefinitionListener();
     const walker = new ParseTreeWalker();
     walker.walk(listener, parser.programUnit());
-    this.symbols = mapRangesToLocations(document.uri, listener.symbols);
+    const newSymbols = mapRangesToLocations(document.uri, listener.symbols);
+    this.symbols = new Map([...this.symbols, ...newSymbols]);
   }
 
   get(symbol: string): Location | null {

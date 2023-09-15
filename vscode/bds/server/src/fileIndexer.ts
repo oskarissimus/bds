@@ -6,14 +6,8 @@ import {
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { promises as fs } from "fs";
 import { fileURLToPath } from "url";
-import { SymbolIndex } from "./symbolIndex";
 import { glob } from "glob";
-import { DocumentParser } from "./defaultDocumentParser";
-
-type ParsedFile = {
-  uri: string;
-  data: any;
-};
+import { SymbolTable } from "./symbolTable";
 
 type FileData = {
   path: string;
@@ -23,8 +17,7 @@ export class WorkspaceIndexer {
   constructor(
     private workspace: RemoteWorkspace,
     private supportsWorkspaceFolders: boolean | undefined,
-    private index: SymbolIndex,
-    private parser: DocumentParser,
+    private symbolTable: SymbolTable,
     private connection: Connection
   ) {}
 
@@ -40,8 +33,7 @@ export class WorkspaceIndexer {
       console.log(filePaths);
       const files = await this.readFiles(filePaths);
       const documents = this.buildDocuments(files);
-      const parsedFiles = this.parse(documents);
-      this.indexFiles(parsedFiles);
+      this.indexFiles(documents);
 
       this.connection.sendNotification(
         "custom/indexingStatus",
@@ -114,20 +106,10 @@ export class WorkspaceIndexer {
     });
   }
 
-  private parse(documents: TextDocument[]): ParsedFile[] {
-    return documents.map((document) => {
-      console.log(`Parsing document ${document.uri}...`);
-      return {
-        uri: document.uri,
-        data: this.parser.parse(document),
-      };
-    });
-  }
-
-  private indexFiles(parsedFiles: ParsedFile[]): void {
-    parsedFiles.forEach((parsedFile) => {
-      console.log(`Indexing document ${parsedFile.uri}...`);
-      this.index.indexDocument(parsedFile.uri, parsedFile.data);
+  private indexFiles(documents: TextDocument[]): void {
+    documents.forEach((document) => {
+      console.log(`Indexing document ${document.uri}...`);
+      this.symbolTable.indexDocument(document);
     });
   }
 }
