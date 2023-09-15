@@ -24,7 +24,11 @@
         "name": "keyword.declaration.bds"
     },
     "operators": {
-        "match": "[-+*/%&|<>!=]|\\+\\+|--|\\|=|&=|/=|\\*=|-=|\\+=|:=|<-|=>",
+        "match": "[-+*/%&|<>!=]|\\+\\+|--|\\|=|&=|/=|\\*=|-=|\\+=|<-|=>",
         "name": "keyword.operator.bds"
+    },
+    "assignmentOperator": {
+        "match": ":=",
+        "name": "keyword.control.type.inference.bds"
     }
 }

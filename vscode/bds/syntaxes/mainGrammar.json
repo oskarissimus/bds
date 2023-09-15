@@ -38,6 +38,9 @@
 			"include": "#operators"
 		},
 		{
+			"include": "#assignmentOperator"
+		},
+		{
 			"include": "#includeKeyword"
 		},
 		{
