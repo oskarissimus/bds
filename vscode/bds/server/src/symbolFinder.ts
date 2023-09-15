@@ -1,36 +1,73 @@
-import { CharStream, InputStream, Token } from "antlr4";
-import bdsLexer from "./grammar/bdsLexer";
+import {
+  CharStream,
+  CommonTokenStream,
+  ParserRuleContext,
+  TerminalNode,
+  Token,
+} from "antlr4";
+import bdsParser, { FunctionDeclarationContext } from "./grammar/bdsParser";
 import { Position } from "vscode-languageserver";
+import bdsLexer from "./grammar/bdsLexer";
 
-export function getAllTokens(sourceCode: string): Token[] {
-  const charStream = new CharStream(sourceCode);
-  const lexer = new bdsLexer(charStream);
-  const tokens = lexer.getAllTokens();
-  return tokens;
-}
-
-export function isPositionWithinToken(
-  position: Position,
-  token: Token
-): boolean {
-  return (
-    token.line == position.line + 1 &&
-    token.column <= position.character &&
-    position.character < token.column + token.text.length
-  );
-}
-
-export function getSymbolFromTokens(
+export function getScopedSymbolFromAST(
   sourceCode: string,
   position: Position
 ): string | null {
-  const tokens = getAllTokens(sourceCode);
+  const tree = parseSourceCode(sourceCode);
+  const targetNode = findNodeAtPosition(tree, position);
+  if (!targetNode) return null;
+  let currentScope = targetNode;
 
-  for (let token of tokens) {
-    if (isPositionWithinToken(position, token)) {
-      return token.text;
+  while (
+    currentScope &&
+    !(currentScope instanceof FunctionDeclarationContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  if (currentScope && currentScope instanceof FunctionDeclarationContext) {
+    const functionName = currentScope.ID().getText();
+    return `${functionName}:${targetNode.getText()}`;
+  }
+
+  return targetNode.getText();
+}
+
+function parseSourceCode(sourceCode: string): ParserRuleContext {
+  const charStream = new CharStream(sourceCode);
+  const lexer = new bdsLexer(charStream);
+  const tokens = new CommonTokenStream(lexer);
+  const parser = new bdsParser(tokens);
+  return parser.programUnit();
+}
+
+function findNodeAtPosition(
+  node: ParserRuleContext,
+  position: Position
+): ParserRuleContext | null {
+  if (node instanceof TerminalNode) {
+    const symbol = node.symbol;
+    if (isPositionWithinSymbol(position, symbol)) {
+      return node;
+    } else {
+      return null;
     }
   }
 
+  for (let i = 0; i < node.getChildCount(); i++) {
+    const childNode = node.getChild(i) as ParserRuleContext;
+    const result = findNodeAtPosition(childNode, position);
+    if (result) return result;
+  }
+
   return null;
+}
+
+function isPositionWithinSymbol(position: Position, symbol: Token): boolean {
+  return (
+    symbol.line === position.line + 1 &&
+    symbol.column <= position.character &&
+    position.character < symbol.column + symbol.text.length
+  );
 }

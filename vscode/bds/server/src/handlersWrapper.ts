@@ -13,7 +13,7 @@ import {
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { WorkspaceIndexer } from "./fileIndexer";
-import { getSymbolFromTokens } from "./symbolFinder";
+import { getScopedSymbolFromAST } from "./symbolFinder";
 import { SymbolDefinitionTable } from "./symbolDefinition";
 import { SymbolReferenceTable } from "./symbolReference";
 
@@ -69,10 +69,9 @@ class HandlersWrapper {
 
     if (!document) return null;
     const code = document.getText();
-    const symbol = getSymbolFromTokens(code, textDocumentPosition.position);
+    const symbol = getScopedSymbolFromAST(code, textDocumentPosition.position);
+    console.log(symbol);
     if (!symbol) return null;
-    console.log(this.symbolDefinitionTable);
-    this.symbolDefinitionTable.indexDocument(document);
     console.log(this.symbolDefinitionTable);
     const symbolLocation = this.symbolDefinitionTable.get(symbol);
     if (!symbolLocation) return null;
@@ -86,9 +85,10 @@ class HandlersWrapper {
 
     if (!document) return [];
     const code = document.getText();
-    const symbol = getSymbolFromTokens(code, textDocumentPosition.position);
+    const symbol = getScopedSymbolFromAST(code, textDocumentPosition.position);
     if (!symbol) return [];
     this.symbolReferenceTable.indexDocument(document);
+    console.log(this.symbolReferenceTable);
     const symbolLocations = this.symbolReferenceTable.get(symbol);
     if (!symbolLocations) return [];
     return symbolLocations;

@@ -16,6 +16,7 @@ import { TextDocument } from "vscode-languageserver-textdocument";
 
 class SymbolDefinitionListener extends bdsListener {
   symbols: Map<string, Range>;
+  currentScope: string | null = null; // Added this line to track the current scope
 
   constructor() {
     super();
@@ -23,7 +24,14 @@ class SymbolDefinitionListener extends bdsListener {
   }
 
   enterFunctionDeclaration = (ctx: FunctionDeclarationContext): void => {
-    this._addSymbol(ctx.ID());
+    // When entering a function declaration, set the currentScope to the function's name
+    this.currentScope = ctx.ID().getText();
+    this._addSymbol(ctx.ID(), false); // false means no prefix for function itself
+  };
+
+  exitFunctionDeclaration = (): void => {
+    // When exiting a function declaration, clear the currentScope
+    this.currentScope = null;
   };
 
   enterVariableInitImplicit = (ctx: VariableInitImplicitContext): void => {
@@ -34,15 +42,23 @@ class SymbolDefinitionListener extends bdsListener {
     this._addSymbol(ctx.ID());
   };
 
-  private _addSymbol(token: TerminalNode): void {
+  private _addSymbol(
+    token: TerminalNode,
+    prefixWithScope: boolean = true
+  ): void {
     const symbolName = token.getText();
+    const symbolFullName =
+      prefixWithScope && this.currentScope
+        ? `${this.currentScope}:${symbolName}`
+        : symbolName;
+
     const symbol = token.symbol;
     const start = Position.create(symbol.line - 1, symbol.column);
     const end = Position.create(
       symbol.line - 1,
       symbol.column + symbolName.length
     );
-    this.symbols.set(symbolName, Range.create(start, end));
+    this.symbols.set(symbolFullName, Range.create(start, end));
   }
 }
 
