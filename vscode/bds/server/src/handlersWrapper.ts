@@ -13,7 +13,7 @@ import {
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { WorkspaceIndexer } from "./fileIndexer";
-import { getScopedSymbolFromAST } from "./symbolFinder";
+import { getScopedSymbolFromAST } from "./getScopedSymbolFromAST";
 import { SymbolTable } from "./symbolTable";
 import { SymbolReferenceTable } from "./symbolReference";
 
