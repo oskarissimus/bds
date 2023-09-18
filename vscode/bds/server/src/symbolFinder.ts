@@ -8,7 +8,9 @@ import {
 import bdsParser, {
   ClassDefContext,
   ExpressionContext,
+  FunctionDeclarationContext,
   MethodCallContext,
+  ReferenceVarContext,
 } from "./grammar/bdsParser";
 import { Position } from "vscode-languageserver";
 import bdsLexer from "./grammar/bdsLexer";
@@ -22,6 +24,10 @@ export function getScopedSymbolFromAST(
   const tree = parseSourceCode(sourceCode);
   const targetNode = findNodeAtPosition(tree, position);
   if (!targetNode) return null;
+  if (isTragetNodePartOfMethodCall(targetNode)) {
+    const methodCall = getParentMethodCall(targetNode);
+    return getScopedSymbolFromMethodCall(methodCall, symbolTable);
+  }
 
   const parentFunctionName = findParentFunction(targetNode);
   const parentClassName = findParentClass(targetNode);
@@ -34,6 +40,60 @@ export function getScopedSymbolFromAST(
   }
 
   return scopedSymbolName;
+}
+
+function getParentMethodCall(node: ParserRuleContext): MethodCallContext {
+  let currentScope = node;
+
+  while (
+    currentScope &&
+    !(currentScope instanceof MethodCallContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  return currentScope as MethodCallContext;
+}
+function isTragetNodePartOfMethodCall(node: ParserRuleContext): boolean {
+  let currentScope = node;
+
+  while (
+    currentScope &&
+    !(currentScope instanceof MethodCallContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  return currentScope instanceof MethodCallContext;
+}
+
+function getScopedSymbolFromMethodCall(
+  node: MethodCallContext,
+  symbolTable: SymbolTable
+): string | null {
+  const methodCall = node;
+  const methodName = methodCall.ID().getText();
+  const object = methodCall.expression(0);
+  const expressionType = getExpressionType(object, symbolTable);
+  if (!expressionType) return null;
+  return `${expressionType}.${methodName}`;
+}
+
+function getExpressionType(
+  node: ExpressionContext,
+  symbolTable: SymbolTable
+): string | null {
+  if (node instanceof ReferenceVarContext) {
+    const referenceVar = node as ReferenceVarContext;
+    const referenceName = referenceVar.ID().getText();
+    const referenceSymbol = symbolTable.get(referenceName);
+    if (referenceSymbol) {
+      return referenceSymbol.type;
+    }
+  }
+  return null;
 }
 
 function parseSourceCode(sourceCode: string): ParserRuleContext {
