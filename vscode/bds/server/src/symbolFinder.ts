@@ -9,8 +9,11 @@ import bdsParser, {
   ClassDefContext,
   ExpressionContext,
   ExpressionNewContext,
+  FieldContext,
+  FieldDeclarationContext,
   FunctionDeclarationContext,
   MethodCallContext,
+  MethodDeclarationContext,
   ReferenceVarContext,
 } from "./grammar/bdsParser";
 import { Position } from "vscode-languageserver";
@@ -35,6 +38,14 @@ export function getScopedSymbolFromAST(
     return `${className}.${className}`;
   }
 
+  if (isTargetNodeTypeOfVariableInitInMethod(targetNode)) {
+    return targetNode.getText();
+  }
+
+  if (isTargetNodeTypeOfFieldDefinition(targetNode)) {
+    return targetNode.getText();
+  }
+
   const parentFunctionName = findParentFunction(targetNode);
   const parentClassName = findParentClass(targetNode);
   let scopedSymbolName = targetNode.getText();
@@ -46,6 +57,46 @@ export function getScopedSymbolFromAST(
   }
 
   return scopedSymbolName;
+}
+
+function isTargetNodeTypeOfVariableInitInMethod(node: ParserRuleContext) {
+  let currentScope = node;
+
+  while (
+    currentScope &&
+    !(currentScope instanceof MethodDeclarationContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  if (!(currentScope instanceof MethodDeclarationContext)) return false;
+
+  const methodDeclaration = currentScope as MethodDeclarationContext;
+  const vars = methodDeclaration.functionDeclaration().varDeclaration_list();
+  return vars.some((varDeclaration) => {
+    return (
+      varDeclaration.type_() &&
+      varDeclaration.type_().getText() === node.getText()
+    );
+  });
+}
+
+function isTargetNodeTypeOfFieldDefinition(node: ParserRuleContext): boolean {
+  let currentScope = node;
+
+  while (
+    currentScope &&
+    !(currentScope instanceof FieldDeclarationContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  if (!(currentScope instanceof FieldDeclarationContext)) return false;
+
+  const field = currentScope as FieldDeclarationContext;
+  return field.varDeclaration().type_().getText() === node.getText();
 }
 
 function isTargetNodePartOfExpressionNew(node: ParserRuleContext): boolean {
