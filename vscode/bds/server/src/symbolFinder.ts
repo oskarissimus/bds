@@ -25,7 +25,7 @@ export function getScopedSymbolFromAST(
   const tree = parseSourceCode(sourceCode);
   const targetNode = findNodeAtPosition(tree, position);
   if (!targetNode) return null;
-  if (isTragetNodePartOfMethodCall(targetNode)) {
+  if (isTragetNodeIDPartOfMethodCall(targetNode)) {
     const methodCall = getParentMethodCall(targetNode);
     return getScopedSymbolFromMethodCall(methodCall, symbolTable);
   }
@@ -75,7 +75,7 @@ function getParentMethodCall(node: ParserRuleContext): MethodCallContext {
 
   return currentScope as MethodCallContext;
 }
-function isTragetNodePartOfMethodCall(node: ParserRuleContext): boolean {
+function isTragetNodeIDPartOfMethodCall(node: ParserRuleContext): boolean {
   let currentScope = node;
 
   while (
@@ -86,7 +86,10 @@ function isTragetNodePartOfMethodCall(node: ParserRuleContext): boolean {
     currentScope = currentScope.parentCtx;
   }
 
-  return currentScope instanceof MethodCallContext;
+  if (!(currentScope instanceof MethodCallContext)) return false;
+
+  const methodCall = currentScope as MethodCallContext;
+  return methodCall.ID().getText() === node.getText();
 }
 
 function getScopedSymbolFromMethodCall(

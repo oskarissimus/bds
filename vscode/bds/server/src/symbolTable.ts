@@ -39,6 +39,7 @@ class SymbolDefinitionListener extends bdsListener {
   }
 
   enterClassDef = (ctx: ClassDefContext): void => {
+    this._addSymbol(ctx.ID(0), ctx.ID(0).getText());
     this.classScope = ctx.ID(0).getText();
   };
 
@@ -82,6 +83,7 @@ class SymbolDefinitionListener extends bdsListener {
   };
 
   private _addSymbol(token: TerminalNode, type: string): void {
+    console.log(`Adding symbol ${token.getText()}`);
     const symbolName = token.getText();
     let scopedSymbolName = symbolName;
     if (this.functionScope) {
