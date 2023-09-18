@@ -5,33 +5,35 @@ import {
   TerminalNode,
   Token,
 } from "antlr4";
-import bdsParser, { FunctionDeclarationContext } from "./grammar/bdsParser";
+import bdsParser, {
+  ClassDefContext,
+  ExpressionContext,
+  MethodCallContext,
+} from "./grammar/bdsParser";
 import { Position } from "vscode-languageserver";
 import bdsLexer from "./grammar/bdsLexer";
+import { SymbolTable } from "./symbolTable";
 
 export function getScopedSymbolFromAST(
   sourceCode: string,
-  position: Position
+  position: Position,
+  symbolTable: SymbolTable
 ): string | null {
   const tree = parseSourceCode(sourceCode);
   const targetNode = findNodeAtPosition(tree, position);
   if (!targetNode) return null;
-  let currentScope = targetNode;
 
-  while (
-    currentScope &&
-    !(currentScope instanceof FunctionDeclarationContext) &&
-    currentScope.parentCtx
-  ) {
-    currentScope = currentScope.parentCtx;
+  const parentFunctionName = findParentFunction(targetNode);
+  const parentClassName = findParentClass(targetNode);
+  let scopedSymbolName = targetNode.getText();
+  if (parentFunctionName) {
+    scopedSymbolName = `${parentFunctionName}:${scopedSymbolName}`;
+  }
+  if (parentClassName) {
+    scopedSymbolName = `${parentClassName}.${scopedSymbolName}`;
   }
 
-  if (currentScope && currentScope instanceof FunctionDeclarationContext) {
-    const functionName = currentScope.ID().getText();
-    return `${functionName}:${targetNode.getText()}`;
-  }
-
-  return targetNode.getText();
+  return scopedSymbolName;
 }
 
 function parseSourceCode(sourceCode: string): ParserRuleContext {
@@ -70,4 +72,41 @@ function isPositionWithinSymbol(position: Position, symbol: Token): boolean {
     symbol.column <= position.character &&
     position.character < symbol.column + symbol.text.length
   );
+}
+
+function findParentFunction(node: ParserRuleContext): string | null {
+  let currentScope = node;
+
+  while (
+    currentScope &&
+    !(currentScope instanceof FunctionDeclarationContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  if (currentScope && currentScope instanceof FunctionDeclarationContext) {
+    const result = currentScope.ID().getText();
+    return result;
+  }
+
+  return null;
+}
+
+function findParentClass(node: ParserRuleContext): string | null {
+  let currentScope = node;
+
+  while (
+    currentScope &&
+    !(currentScope instanceof ClassDefContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  if (currentScope && currentScope instanceof ClassDefContext) {
+    return currentScope.ID(0).getText();
+  }
+
+  return null;
 }

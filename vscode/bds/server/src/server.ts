@@ -5,18 +5,18 @@ import {
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import HandlersWrapper from "./handlersWrapper";
-import { SymbolDefinitionTable } from "./symbolDefinition";
+import { SymbolTable } from "./symbolTable";
 import { SymbolReferenceTable } from "./symbolReference";
 
 const connection = createConnection(ProposedFeatures.all);
 const documents = new TextDocuments(TextDocument);
-const symbolDefinitionTable = new SymbolDefinitionTable();
+const symbolTable = new SymbolTable();
 const symbolReferenceTable = new SymbolReferenceTable();
 
 const requestHandler = new HandlersWrapper(
   connection,
   documents,
-  symbolDefinitionTable,
+  symbolTable,
   symbolReferenceTable
 );
 

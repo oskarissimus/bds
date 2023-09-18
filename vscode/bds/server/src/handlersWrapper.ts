@@ -14,25 +14,25 @@ import {
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { WorkspaceIndexer } from "./fileIndexer";
 import { getScopedSymbolFromAST } from "./symbolFinder";
-import { SymbolDefinitionTable } from "./symbolDefinition";
+import { SymbolTable } from "./symbolTable";
 import { SymbolReferenceTable } from "./symbolReference";
 
 class HandlersWrapper {
   private clientCapabilities: ClientCapabilities = {};
   private connection: Connection;
   private documents: TextDocuments<TextDocument>;
-  private symbolDefinitionTable: SymbolDefinitionTable;
+  private symbolTable: SymbolTable;
   private symbolReferenceTable: SymbolReferenceTable;
 
   constructor(
     connection: Connection,
     documents: TextDocuments<TextDocument>,
-    symbolDefinitionTable: SymbolDefinitionTable,
+    symbolTable: SymbolTable,
     symbolReferenceTable: SymbolReferenceTable
   ) {
     this.connection = connection;
     this.documents = documents;
-    this.symbolDefinitionTable = symbolDefinitionTable;
+    this.symbolTable = symbolTable;
     this.symbolReferenceTable = symbolReferenceTable;
   }
   handleInitialize(params: InitializeParams): InitializeResult {
@@ -50,7 +50,7 @@ class HandlersWrapper {
     const indexer = new WorkspaceIndexer(
       this.connection.workspace,
       this.clientCapabilities.workspace?.workspaceFolders,
-      this.symbolDefinitionTable,
+      this.symbolTable,
       this.symbolReferenceTable,
       this.connection
     );
@@ -58,7 +58,7 @@ class HandlersWrapper {
   }
 
   handleDocumentChange(change: TextDocumentChangeEvent<TextDocument>): void {
-    this.symbolDefinitionTable.indexDocument(change.document);
+    this.symbolTable.indexDocument(change.document);
     this.symbolReferenceTable.indexDocument(change.document);
   }
 
@@ -69,13 +69,17 @@ class HandlersWrapper {
 
     if (!document) return null;
     const code = document.getText();
-    const symbol = getScopedSymbolFromAST(code, textDocumentPosition.position);
+    const symbol = getScopedSymbolFromAST(
+      code,
+      textDocumentPosition.position,
+      this.symbolTable
+    );
     console.log(symbol);
     if (!symbol) return null;
-    console.log(this.symbolDefinitionTable);
-    const symbolLocation = this.symbolDefinitionTable.get(symbol);
-    if (!symbolLocation) return null;
-    return symbolLocation;
+    console.log(this.symbolTable);
+    const symbolInfo = this.symbolTable.get(symbol);
+    if (!symbolInfo) return null;
+    return symbolInfo.location;
   }
 
   handleReferences(textDocumentPosition: ReferenceParams): Location[] {
@@ -85,7 +89,11 @@ class HandlersWrapper {
 
     if (!document) return [];
     const code = document.getText();
-    const symbol = getScopedSymbolFromAST(code, textDocumentPosition.position);
+    const symbol = getScopedSymbolFromAST(
+      code,
+      textDocumentPosition.position,
+      this.symbolTable
+    );
     if (!symbol) return [];
     this.symbolReferenceTable.indexDocument(document);
     console.log(this.symbolReferenceTable);

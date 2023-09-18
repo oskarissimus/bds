@@ -460,36 +460,55 @@ export default class bdsParser extends Parser {
 			switch (this._input.LA(1)) {
 			case 5:
 				{
+				localctx = new TypeBoolContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+
 				this.state = 65;
 				this.match(bdsParser.T__4);
 				}
 				break;
 			case 6:
 				{
+				localctx = new TypeIntContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 66;
 				this.match(bdsParser.T__5);
 				}
 				break;
 			case 7:
 				{
+				localctx = new TypeRealContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 67;
 				this.match(bdsParser.T__6);
 				}
 				break;
 			case 8:
 				{
+				localctx = new TypeStringContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 68;
 				this.match(bdsParser.T__7);
 				}
 				break;
 			case 9:
 				{
+				localctx = new TypeVoidContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 69;
 				this.match(bdsParser.T__8);
 				}
 				break;
 			case 93:
 				{
+				localctx = new TypeClassContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 70;
 				this.match(bdsParser.ID);
 				}
@@ -513,7 +532,7 @@ export default class bdsParser extends Parser {
 					switch ( this._interp.adaptivePredict(this._input, 5, this._ctx) ) {
 					case 1:
 						{
-						localctx = new TypeContext(this, _parentctx, _parentState);
+						localctx = new TypeArrayContext(this, new TypeContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_type);
 						this.state = 73;
 						if (!(this.precpred(this._ctx, 4))) {
@@ -527,7 +546,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 2:
 						{
-						localctx = new TypeContext(this, _parentctx, _parentState);
+						localctx = new TypeMapContext(this, new TypeContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_type);
 						this.state = 76;
 						if (!(this.precpred(this._ctx, 3))) {
@@ -541,7 +560,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 3:
 						{
-						localctx = new TypeContext(this, _parentctx, _parentState);
+						localctx = new TypeMapContext(this, new TypeContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_type);
 						this.state = 79;
 						if (!(this.precpred(this._ctx, 2))) {
@@ -793,6 +812,7 @@ export default class bdsParser extends Parser {
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 16, this._ctx) ) {
 			case 1:
+				localctx = new FieldDeclarationContext(this, localctx);
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 131;
@@ -814,6 +834,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 2:
+				localctx = new MethodDeclarationContext(this, localctx);
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 138;
@@ -964,6 +985,7 @@ export default class bdsParser extends Parser {
 			this._errHandler.sync(this);
 			switch ( this._interp.adaptivePredict(this._input, 79, this._ctx) ) {
 			case 1:
+				localctx = new BlockContext(this, localctx);
 				this.enterOuterAlt(localctx, 1);
 				{
 				this.state = 180;
@@ -987,6 +1009,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 2:
+				localctx = new BreakContext(this, localctx);
 				this.enterOuterAlt(localctx, 2);
 				{
 				this.state = 188;
@@ -1010,6 +1033,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 3:
+				localctx = new BreakpointContext(this, localctx);
 				this.enterOuterAlt(localctx, 3);
 				{
 				this.state = 195;
@@ -1043,6 +1067,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 4:
+				localctx = new CheckpointContext(this, localctx);
 				this.enterOuterAlt(localctx, 4);
 				{
 				this.state = 205;
@@ -1076,6 +1101,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 5:
+				localctx = new ContinueContext(this, localctx);
 				this.enterOuterAlt(localctx, 5);
 				{
 				this.state = 215;
@@ -1099,6 +1125,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 6:
+				localctx = new DebugContext(this, localctx);
 				this.enterOuterAlt(localctx, 6);
 				{
 				this.state = 222;
@@ -1132,6 +1159,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 7:
+				localctx = new ExitContext(this, localctx);
 				this.enterOuterAlt(localctx, 7);
 				{
 				this.state = 232;
@@ -1165,6 +1193,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 8:
+				localctx = new PrintContext(this, localctx);
 				this.enterOuterAlt(localctx, 8);
 				{
 				this.state = 242;
@@ -1198,6 +1227,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 9:
+				localctx = new PrintlnContext(this, localctx);
 				this.enterOuterAlt(localctx, 9);
 				{
 				this.state = 252;
@@ -1231,6 +1261,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 10:
+				localctx = new WarningContext(this, localctx);
 				this.enterOuterAlt(localctx, 10);
 				{
 				this.state = 262;
@@ -1264,6 +1295,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 11:
+				localctx = new ErrorContext(this, localctx);
 				this.enterOuterAlt(localctx, 11);
 				{
 				this.state = 272;
@@ -1297,6 +1329,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 12:
+				localctx = new TryCatchFinallyContext(this, localctx);
 				this.enterOuterAlt(localctx, 12);
 				{
 				this.state = 282;
@@ -1392,6 +1425,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 13:
+				localctx = new ThrowContext(this, localctx);
 				this.enterOuterAlt(localctx, 13);
 				{
 				this.state = 317;
@@ -1417,6 +1451,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 14:
+				localctx = new ForLoopContext(this, localctx);
 				this.enterOuterAlt(localctx, 14);
 				{
 				this.state = 325;
@@ -1453,7 +1488,7 @@ export default class bdsParser extends Parser {
 				if ((((_la) & ~0x1F) === 0 && ((1 << _la) & 70656) !== 0) || ((((_la - 46)) & ~0x1F) === 0 && ((1 << (_la - 46)) & 520094495) !== 0) || ((((_la - 81)) & ~0x1F) === 0 && ((1 << (_la - 81)) & 4543) !== 0)) {
 					{
 					this.state = 335;
-					localctx._end = this.forEnd();
+					(localctx as ForLoopContext)._end = this.forEnd();
 					}
 				}
 
@@ -1480,6 +1515,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 15:
+				localctx = new ForLoopListContext(this, localctx);
 				this.enterOuterAlt(localctx, 15);
 				{
 				this.state = 346;
@@ -1515,6 +1551,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 16:
+				localctx = new IfContext(this, localctx);
 				this.enterOuterAlt(localctx, 16);
 				{
 				this.state = 359;
@@ -1574,6 +1611,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 17:
+				localctx = new KillContext(this, localctx);
 				this.enterOuterAlt(localctx, 17);
 				{
 				this.state = 380;
@@ -1599,6 +1637,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 18:
+				localctx = new ReturnContext(this, localctx);
 				this.enterOuterAlt(localctx, 18);
 				{
 				this.state = 388;
@@ -1632,6 +1671,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 19:
+				localctx = new WaitContext(this, localctx);
 				this.enterOuterAlt(localctx, 19);
 				{
 				this.state = 398;
@@ -1683,6 +1723,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 20:
+				localctx = new SwitchContext(this, localctx);
 				this.enterOuterAlt(localctx, 20);
 				{
 				this.state = 415;
@@ -1862,6 +1903,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 21:
+				localctx = new WhileContext(this, localctx);
 				this.enterOuterAlt(localctx, 21);
 				{
 				this.state = 485;
@@ -1901,6 +1943,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 22:
+				localctx = new StatementFunctionDeclarationContext(this, localctx);
 				this.enterOuterAlt(localctx, 22);
 				{
 				this.state = 498;
@@ -1924,6 +1967,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 23:
+				localctx = new StatementVarDeclarationContext(this, localctx);
 				this.enterOuterAlt(localctx, 23);
 				{
 				this.state = 505;
@@ -1947,6 +1991,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 24:
+				localctx = new ClassDeclarationContext(this, localctx);
 				this.enterOuterAlt(localctx, 24);
 				{
 				this.state = 512;
@@ -1970,6 +2015,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 25:
+				localctx = new StatementExprContext(this, localctx);
 				this.enterOuterAlt(localctx, 25);
 				{
 				this.state = 519;
@@ -1993,6 +2039,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 26:
+				localctx = new StatementIncludeContext(this, localctx);
 				this.enterOuterAlt(localctx, 26);
 				{
 				this.state = 526;
@@ -2016,6 +2063,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 27:
+				localctx = new HelpContext(this, localctx);
 				this.enterOuterAlt(localctx, 27);
 				{
 				this.state = 533;
@@ -2023,6 +2071,7 @@ export default class bdsParser extends Parser {
 				}
 				break;
 			case 28:
+				localctx = new StatmentEolContext(this, localctx);
 				this.enterOuterAlt(localctx, 28);
 				{
 				this.state = 534;
@@ -2158,42 +2207,64 @@ export default class bdsParser extends Parser {
 			switch ( this._interp.adaptivePredict(this._input, 93, this._ctx) ) {
 			case 1:
 				{
+				localctx = new LiteralNullContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
+
 				this.state = 546;
 				this.match(bdsParser.NULL_LITERAL);
 				}
 				break;
 			case 2:
 				{
+				localctx = new LiteralBoolContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 547;
 				this.match(bdsParser.BOOL_LITERAL);
 				}
 				break;
 			case 3:
 				{
+				localctx = new LiteralIntContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 548;
 				this.match(bdsParser.INT_LITERAL);
 				}
 				break;
 			case 4:
 				{
+				localctx = new LiteralRealContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 549;
 				this.match(bdsParser.REAL_LITERAL);
 				}
 				break;
 			case 5:
 				{
+				localctx = new LiteralStringContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 550;
 				this.match(bdsParser.STRING_LITERAL);
 				}
 				break;
 			case 6:
 				{
+				localctx = new LiteralStringContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 551;
 				this.match(bdsParser.STRING_LITERAL_SINGLE);
 				}
 				break;
 			case 7:
 				{
+				localctx = new ExpressionCastContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 552;
 				this.match(bdsParser.T__15);
 				this.state = 553;
@@ -2206,6 +2277,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 8:
 				{
+				localctx = new ExpressionNewContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 556;
 				this.match(bdsParser.T__45);
 				this.state = 557;
@@ -2244,6 +2318,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 9:
 				{
+				localctx = new FunctionCallContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 570;
 				this.match(bdsParser.ID);
 				this.state = 571;
@@ -2280,17 +2357,23 @@ export default class bdsParser extends Parser {
 				break;
 			case 10:
 				{
+				localctx = new ReferenceVarContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 583;
 				this.match(bdsParser.ID);
 				}
 				break;
 			case 11:
 				{
+				localctx = new PreContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 584;
-				localctx._op = this._input.LT(1);
+				(localctx as PreContext)._op = this._input.LT(1);
 				_la = this._input.LA(1);
 				if(!(_la===47 || _la===48)) {
-				    localctx._op = this._errHandler.recoverInline(this);
+				    (localctx as PreContext)._op = this._errHandler.recoverInline(this);
 				}
 				else {
 					this._errHandler.reportMatch(this);
@@ -2302,6 +2385,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 12:
 				{
+				localctx = new ExpressionBitNegationContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 586;
 				this.match(bdsParser.T__48);
 				this.state = 587;
@@ -2310,6 +2396,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 13:
 				{
+				localctx = new ExpressionLogicNotContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 588;
 				this.match(bdsParser.T__49);
 				this.state = 589;
@@ -2318,11 +2407,14 @@ export default class bdsParser extends Parser {
 				break;
 			case 14:
 				{
+				localctx = new ExpressionUnaryPlusMinusContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 590;
-				localctx._op = this._input.LT(1);
+				(localctx as ExpressionUnaryPlusMinusContext)._op = this._input.LT(1);
 				_la = this._input.LA(1);
 				if(!(_la===54 || _la===55)) {
-				    localctx._op = this._errHandler.recoverInline(this);
+				    (localctx as ExpressionUnaryPlusMinusContext)._op = this._errHandler.recoverInline(this);
 				}
 				else {
 					this._errHandler.reportMatch(this);
@@ -2334,6 +2426,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 15:
 				{
+				localctx = new ExpressionParenContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 592;
 				this.match(bdsParser.T__15);
 				this.state = 593;
@@ -2344,6 +2439,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 16:
 				{
+				localctx = new LiteralListEmptyContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 596;
 				this.match(bdsParser.T__9);
 				this.state = 597;
@@ -2352,6 +2450,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 17:
 				{
+				localctx = new LiteralListContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 598;
 				this.match(bdsParser.T__9);
 				this.state = 599;
@@ -2378,6 +2479,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 18:
 				{
+				localctx = new LiteralMapEmptyContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 609;
 				this.match(bdsParser.T__11);
 				this.state = 610;
@@ -2386,6 +2490,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 19:
 				{
+				localctx = new LiteralMapContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 611;
 				this.match(bdsParser.T__11);
 				this.state = 612;
@@ -2420,18 +2527,27 @@ export default class bdsParser extends Parser {
 				break;
 			case 20:
 				{
+				localctx = new ExpressionSysContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 627;
 				this.match(bdsParser.SYS_LITERAL);
 				}
 				break;
 			case 21:
 				{
+				localctx = new ExpressionTaskLiteralContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 628;
 				this.match(bdsParser.TASK_LITERAL);
 				}
 				break;
 			case 22:
 				{
+				localctx = new ExpressionTaskContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 629;
 				this.match(bdsParser.T__69);
 				this.state = 641;
@@ -2470,6 +2586,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 23:
 				{
+				localctx = new ExpressionDepContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 644;
 				this.match(bdsParser.T__70);
 				this.state = 645;
@@ -2500,6 +2619,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 24:
 				{
+				localctx = new ExpressionGoalContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 657;
 				this.match(bdsParser.T__71);
 				this.state = 658;
@@ -2508,6 +2630,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 25:
 				{
+				localctx = new ExpressionParallelContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 659;
 				_la = this._input.LA(1);
 				if(!(_la===73 || _la===74)) {
@@ -2553,6 +2678,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 26:
 				{
+				localctx = new ExpressionAssignmentListContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 674;
 				this.match(bdsParser.T__15);
 				this.state = 675;
@@ -2583,6 +2711,9 @@ export default class bdsParser extends Parser {
 				break;
 			case 27:
 				{
+				localctx = new ExpressionVariableInitImplicitContext(this, localctx);
+				this._ctx = localctx;
+				_prevctx = localctx;
 				this.state = 686;
 				this.match(bdsParser.ID);
 				this.state = 687;
@@ -2608,17 +2739,17 @@ export default class bdsParser extends Parser {
 					switch ( this._interp.adaptivePredict(this._input, 96, this._ctx) ) {
 					case 1:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionTimesDivModContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 691;
 						if (!(this.precpred(this._ctx, 28))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 28)");
 						}
 						this.state = 692;
-						localctx._op = this._input.LT(1);
+						(localctx as ExpressionTimesDivModContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if(!(((((_la - 51)) & ~0x1F) === 0 && ((1 << (_la - 51)) & 7) !== 0))) {
-						    localctx._op = this._errHandler.recoverInline(this);
+						    (localctx as ExpressionTimesDivModContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
@@ -2630,17 +2761,17 @@ export default class bdsParser extends Parser {
 						break;
 					case 2:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionPlusMinusContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 694;
 						if (!(this.precpred(this._ctx, 27))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 27)");
 						}
 						this.state = 695;
-						localctx._op = this._input.LT(1);
+						(localctx as ExpressionPlusMinusContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if(!(_la===54 || _la===55)) {
-						    localctx._op = this._errHandler.recoverInline(this);
+						    (localctx as ExpressionPlusMinusContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
@@ -2652,17 +2783,17 @@ export default class bdsParser extends Parser {
 						break;
 					case 3:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionCompContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 697;
 						if (!(this.precpred(this._ctx, 26))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 26)");
 						}
 						this.state = 698;
-						localctx._op = this._input.LT(1);
+						(localctx as ExpressionCompContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if(!(((((_la - 56)) & ~0x1F) === 0 && ((1 << (_la - 56)) & 63) !== 0))) {
-						    localctx._op = this._errHandler.recoverInline(this);
+						    (localctx as ExpressionCompContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
@@ -2674,17 +2805,17 @@ export default class bdsParser extends Parser {
 						break;
 					case 4:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionBitOpContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 700;
 						if (!(this.precpred(this._ctx, 24))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 24)");
 						}
 						this.state = 701;
-						localctx._op = this._input.LT(1);
+						(localctx as ExpressionBitOpContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if(!(((((_la - 62)) & ~0x1F) === 0 && ((1 << (_la - 62)) & 7) !== 0))) {
-						    localctx._op = this._errHandler.recoverInline(this);
+						    (localctx as ExpressionBitOpContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
@@ -2696,17 +2827,17 @@ export default class bdsParser extends Parser {
 						break;
 					case 5:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionLogicOpContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 703;
 						if (!(this.precpred(this._ctx, 23))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 23)");
 						}
 						this.state = 704;
-						localctx._op = this._input.LT(1);
+						(localctx as ExpressionLogicOpContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if(!(_la===65 || _la===66)) {
-						    localctx._op = this._errHandler.recoverInline(this);
+						    (localctx as ExpressionLogicOpContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
@@ -2718,7 +2849,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 6:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionCondContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 706;
 						if (!(this.precpred(this._ctx, 21))) {
@@ -2736,7 +2867,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 7:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionDepOperatorContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 712;
 						if (!(this.precpred(this._ctx, 20))) {
@@ -2750,7 +2881,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 8:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionAssignmentBitOrContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 715;
 						if (!(this.precpred(this._ctx, 9))) {
@@ -2764,7 +2895,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 9:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionAssignmentBitAndContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 718;
 						if (!(this.precpred(this._ctx, 8))) {
@@ -2778,7 +2909,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 10:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionAssignmentDivContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 721;
 						if (!(this.precpred(this._ctx, 7))) {
@@ -2792,7 +2923,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 11:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionAssignmentMultContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 724;
 						if (!(this.precpred(this._ctx, 6))) {
@@ -2806,7 +2937,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 12:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionAssignmentMinusContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 727;
 						if (!(this.precpred(this._ctx, 5))) {
@@ -2820,7 +2951,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 13:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionAssignmentPlusContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 730;
 						if (!(this.precpred(this._ctx, 4))) {
@@ -2834,7 +2965,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 14:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ExpressionAssignmentContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 733;
 						if (!(this.precpred(this._ctx, 2))) {
@@ -2848,7 +2979,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 15:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new MethodCallContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 736;
 						if (!(this.precpred(this._ctx, 40))) {
@@ -2892,7 +3023,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 16:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ReferenceFieldContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 751;
 						if (!(this.precpred(this._ctx, 36))) {
@@ -2906,7 +3037,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 17:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ReferenceListContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 754;
 						if (!(this.precpred(this._ctx, 34))) {
@@ -2922,7 +3053,7 @@ export default class bdsParser extends Parser {
 						break;
 					case 18:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new ReferenceMapContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 759;
 						if (!(this.precpred(this._ctx, 33))) {
@@ -2938,17 +3069,17 @@ export default class bdsParser extends Parser {
 						break;
 					case 19:
 						{
-						localctx = new ExpressionContext(this, _parentctx, _parentState);
+						localctx = new PostContext(this, new ExpressionContext(this, _parentctx, _parentState));
 						this.pushNewRecursionContext(localctx, _startState, bdsParser.RULE_expression);
 						this.state = 764;
 						if (!(this.precpred(this._ctx, 31))) {
 							throw this.createFailedPredicateException("this.precpred(this._ctx, 31)");
 						}
 						this.state = 765;
-						localctx._op = this._input.LT(1);
+						(localctx as PostContext)._op = this._input.LT(1);
 						_la = this._input.LA(1);
 						if(!(_la===47 || _la===48)) {
-						    localctx._op = this._errHandler.recoverInline(this);
+						    (localctx as PostContext)._op = this._errHandler.recoverInline(this);
 						}
 						else {
 							this._errHandler.reportMatch(this);
@@ -3501,8 +3632,52 @@ export class TypeContext extends ParserRuleContext {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
-	public ID(): TerminalNode {
-		return this.getToken(bdsParser.ID, 0);
+    public get ruleIndex(): number {
+    	return bdsParser.RULE_type;
+	}
+	public copyFrom(ctx: TypeContext): void {
+		super.copyFrom(ctx);
+	}
+}
+export class TypeArrayContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public type_(): TypeContext {
+		return this.getTypedRuleContext(TypeContext, 0) as TypeContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterTypeArray) {
+	 		listener.enterTypeArray(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitTypeArray) {
+	 		listener.exitTypeArray(this);
+		}
+	}
+}
+export class TypeIntContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterTypeInt) {
+	 		listener.enterTypeInt(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitTypeInt) {
+	 		listener.exitTypeInt(this);
+		}
+	}
+}
+export class TypeMapContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
 	public type__list(): TypeContext[] {
 		return this.getTypedRuleContexts(TypeContext) as TypeContext[];
@@ -3510,17 +3685,97 @@ export class TypeContext extends ParserRuleContext {
 	public type_(i: number): TypeContext {
 		return this.getTypedRuleContext(TypeContext, i) as TypeContext;
 	}
-    public get ruleIndex(): number {
-    	return bdsParser.RULE_type;
-	}
 	public enterRule(listener: bdsListener): void {
-	    if(listener.enterType) {
-	 		listener.enterType(this);
+	    if(listener.enterTypeMap) {
+	 		listener.enterTypeMap(this);
 		}
 	}
 	public exitRule(listener: bdsListener): void {
-	    if(listener.exitType) {
-	 		listener.exitType(this);
+	    if(listener.exitTypeMap) {
+	 		listener.exitTypeMap(this);
+		}
+	}
+}
+export class TypeRealContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterTypeReal) {
+	 		listener.enterTypeReal(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitTypeReal) {
+	 		listener.exitTypeReal(this);
+		}
+	}
+}
+export class TypeStringContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterTypeString) {
+	 		listener.enterTypeString(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitTypeString) {
+	 		listener.exitTypeString(this);
+		}
+	}
+}
+export class TypeClassContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public ID(): TerminalNode {
+		return this.getToken(bdsParser.ID, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterTypeClass) {
+	 		listener.enterTypeClass(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitTypeClass) {
+	 		listener.exitTypeClass(this);
+		}
+	}
+}
+export class TypeBoolContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterTypeBool) {
+	 		listener.enterTypeBool(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitTypeBool) {
+	 		listener.exitTypeBool(this);
+		}
+	}
+}
+export class TypeVoidContext extends TypeContext {
+	constructor(parser: bdsParser, ctx: TypeContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterTypeVoid) {
+	 		listener.enterTypeVoid(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitTypeVoid) {
+	 		listener.exitTypeVoid(this);
 		}
 	}
 }
@@ -3660,6 +3915,43 @@ export class FieldContext extends ParserRuleContext {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
+    public get ruleIndex(): number {
+    	return bdsParser.RULE_field;
+	}
+	public copyFrom(ctx: FieldContext): void {
+		super.copyFrom(ctx);
+	}
+}
+export class MethodDeclarationContext extends FieldContext {
+	constructor(parser: bdsParser, ctx: FieldContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public functionDeclaration(): FunctionDeclarationContext {
+		return this.getTypedRuleContext(FunctionDeclarationContext, 0) as FunctionDeclarationContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterMethodDeclaration) {
+	 		listener.enterMethodDeclaration(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitMethodDeclaration) {
+	 		listener.exitMethodDeclaration(this);
+		}
+	}
+}
+export class FieldDeclarationContext extends FieldContext {
+	constructor(parser: bdsParser, ctx: FieldContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
 	public varDeclaration(): VarDeclarationContext {
 		return this.getTypedRuleContext(VarDeclarationContext, 0) as VarDeclarationContext;
 	}
@@ -3669,20 +3961,14 @@ export class FieldContext extends ParserRuleContext {
 	public eol(i: number): EolContext {
 		return this.getTypedRuleContext(EolContext, i) as EolContext;
 	}
-	public functionDeclaration(): FunctionDeclarationContext {
-		return this.getTypedRuleContext(FunctionDeclarationContext, 0) as FunctionDeclarationContext;
-	}
-    public get ruleIndex(): number {
-    	return bdsParser.RULE_field;
-	}
 	public enterRule(listener: bdsListener): void {
-	    if(listener.enterField) {
-	 		listener.enterField(this);
+	    if(listener.enterFieldDeclaration) {
+	 		listener.enterFieldDeclaration(this);
 		}
 	}
 	public exitRule(listener: bdsListener): void {
-	    if(listener.exitField) {
-	 		listener.exitField(this);
+	    if(listener.exitFieldDeclaration) {
+	 		listener.exitFieldDeclaration(this);
 		}
 	}
 }
@@ -3728,10 +4014,424 @@ export class ClassDefContext extends ParserRuleContext {
 
 
 export class StatementContext extends ParserRuleContext {
-	public _end!: ForEndContext;
 	constructor(parser?: bdsParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
+	}
+    public get ruleIndex(): number {
+    	return bdsParser.RULE_statement;
+	}
+	public copyFrom(ctx: StatementContext): void {
+		super.copyFrom(ctx);
+	}
+}
+export class CheckpointContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterCheckpoint) {
+	 		listener.enterCheckpoint(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitCheckpoint) {
+	 		listener.exitCheckpoint(this);
+		}
+	}
+}
+export class StatementVarDeclarationContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public varDeclaration(): VarDeclarationContext {
+		return this.getTypedRuleContext(VarDeclarationContext, 0) as VarDeclarationContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterStatementVarDeclaration) {
+	 		listener.enterStatementVarDeclaration(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitStatementVarDeclaration) {
+	 		listener.exitStatementVarDeclaration(this);
+		}
+	}
+}
+export class WaitContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterWait) {
+	 		listener.enterWait(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitWait) {
+	 		listener.exitWait(this);
+		}
+	}
+}
+export class StatementIncludeContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public includeFile(): IncludeFileContext {
+		return this.getTypedRuleContext(IncludeFileContext, 0) as IncludeFileContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterStatementInclude) {
+	 		listener.enterStatementInclude(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitStatementInclude) {
+	 		listener.exitStatementInclude(this);
+		}
+	}
+}
+export class ErrorContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterError) {
+	 		listener.enterError(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitError) {
+	 		listener.exitError(this);
+		}
+	}
+}
+export class WhileContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public statement(): StatementContext {
+		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterWhile) {
+	 		listener.enterWhile(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitWhile) {
+	 		listener.exitWhile(this);
+		}
+	}
+}
+export class StatementFunctionDeclarationContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public functionDeclaration(): FunctionDeclarationContext {
+		return this.getTypedRuleContext(FunctionDeclarationContext, 0) as FunctionDeclarationContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterStatementFunctionDeclaration) {
+	 		listener.enterStatementFunctionDeclaration(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitStatementFunctionDeclaration) {
+	 		listener.exitStatementFunctionDeclaration(this);
+		}
+	}
+}
+export class SwitchContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public statement_list(): StatementContext[] {
+		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
+	}
+	public statement(i: number): StatementContext {
+		return this.getTypedRuleContext(StatementContext, i) as StatementContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterSwitch) {
+	 		listener.enterSwitch(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitSwitch) {
+	 		listener.exitSwitch(this);
+		}
+	}
+}
+export class ClassDeclarationContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public classDef(): ClassDefContext {
+		return this.getTypedRuleContext(ClassDefContext, 0) as ClassDefContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterClassDeclaration) {
+	 		listener.enterClassDeclaration(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitClassDeclaration) {
+	 		listener.exitClassDeclaration(this);
+		}
+	}
+}
+export class PrintlnContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterPrintln) {
+	 		listener.enterPrintln(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitPrintln) {
+	 		listener.exitPrintln(this);
+		}
+	}
+}
+export class ContinueContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterContinue) {
+	 		listener.enterContinue(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitContinue) {
+	 		listener.exitContinue(this);
+		}
+	}
+}
+export class WarningContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterWarning) {
+	 		listener.enterWarning(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitWarning) {
+	 		listener.exitWarning(this);
+		}
+	}
+}
+export class BlockContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public statement_list(): StatementContext[] {
+		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
+	}
+	public statement(i: number): StatementContext {
+		return this.getTypedRuleContext(StatementContext, i) as StatementContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterBlock) {
+	 		listener.enterBlock(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitBlock) {
+	 		listener.exitBlock(this);
+		}
+	}
+}
+export class ForLoopContext extends StatementContext {
+	public _end!: ForEndContext;
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public statement(): StatementContext {
+		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
+	}
+	public forInit(): ForInitContext {
+		return this.getTypedRuleContext(ForInitContext, 0) as ForInitContext;
+	}
+	public forCondition(): ForConditionContext {
+		return this.getTypedRuleContext(ForConditionContext, 0) as ForConditionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public forEnd(): ForEndContext {
+		return this.getTypedRuleContext(ForEndContext, 0) as ForEndContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterForLoop) {
+	 		listener.enterForLoop(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitForLoop) {
+	 		listener.exitForLoop(this);
+		}
+	}
+}
+export class ForLoopListContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public varDeclaration(): VarDeclarationContext {
+		return this.getTypedRuleContext(VarDeclarationContext, 0) as VarDeclarationContext;
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public statement(): StatementContext {
+		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterForLoopList) {
+	 		listener.enterForLoopList(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitForLoopList) {
+	 		listener.exitForLoopList(this);
+		}
+	}
+}
+export class IfContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
 	}
 	public statement_list(): StatementContext[] {
 		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
@@ -3745,11 +4445,243 @@ export class StatementContext extends ParserRuleContext {
 	public eol(i: number): EolContext {
 		return this.getTypedRuleContext(EolContext, i) as EolContext;
 	}
-	public expression_list(): ExpressionContext[] {
-		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterIf) {
+	 		listener.enterIf(this);
+		}
 	}
-	public expression(i: number): ExpressionContext {
-		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitIf) {
+	 		listener.exitIf(this);
+		}
+	}
+}
+export class DebugContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterDebug) {
+	 		listener.enterDebug(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitDebug) {
+	 		listener.exitDebug(this);
+		}
+	}
+}
+export class BreakContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterBreak) {
+	 		listener.enterBreak(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitBreak) {
+	 		listener.exitBreak(this);
+		}
+	}
+}
+export class KillContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterKill) {
+	 		listener.enterKill(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitKill) {
+	 		listener.exitKill(this);
+		}
+	}
+}
+export class StatmentEolContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public eol(): EolContext {
+		return this.getTypedRuleContext(EolContext, 0) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterStatmentEol) {
+	 		listener.enterStatmentEol(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitStatmentEol) {
+	 		listener.exitStatmentEol(this);
+		}
+	}
+}
+export class BreakpointContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterBreakpoint) {
+	 		listener.enterBreakpoint(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitBreakpoint) {
+	 		listener.exitBreakpoint(this);
+		}
+	}
+}
+export class ExitContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExit) {
+	 		listener.enterExit(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExit) {
+	 		listener.exitExit(this);
+		}
+	}
+}
+export class HelpContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public HELP_LITERAL(): TerminalNode {
+		return this.getToken(bdsParser.HELP_LITERAL, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterHelp) {
+	 		listener.enterHelp(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitHelp) {
+	 		listener.exitHelp(this);
+		}
+	}
+}
+export class PrintContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterPrint) {
+	 		listener.enterPrint(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitPrint) {
+	 		listener.exitPrint(this);
+		}
+	}
+}
+export class ThrowContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterThrow) {
+	 		listener.enterThrow(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitThrow) {
+	 		listener.exitThrow(this);
+		}
+	}
+}
+export class TryCatchFinallyContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public statement_list(): StatementContext[] {
+		return this.getTypedRuleContexts(StatementContext) as StatementContext[];
+	}
+	public statement(i: number): StatementContext {
+		return this.getTypedRuleContext(StatementContext, i) as StatementContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
 	}
 	public type__list(): TypeContext[] {
 		return this.getTypedRuleContexts(TypeContext) as TypeContext[];
@@ -3763,41 +4695,64 @@ export class StatementContext extends ParserRuleContext {
 	public ID(i: number): TerminalNode {
 		return this.getToken(bdsParser.ID, i);
 	}
-	public forInit(): ForInitContext {
-		return this.getTypedRuleContext(ForInitContext, 0) as ForInitContext;
-	}
-	public forCondition(): ForConditionContext {
-		return this.getTypedRuleContext(ForConditionContext, 0) as ForConditionContext;
-	}
-	public forEnd(): ForEndContext {
-		return this.getTypedRuleContext(ForEndContext, 0) as ForEndContext;
-	}
-	public varDeclaration(): VarDeclarationContext {
-		return this.getTypedRuleContext(VarDeclarationContext, 0) as VarDeclarationContext;
-	}
-	public functionDeclaration(): FunctionDeclarationContext {
-		return this.getTypedRuleContext(FunctionDeclarationContext, 0) as FunctionDeclarationContext;
-	}
-	public classDef(): ClassDefContext {
-		return this.getTypedRuleContext(ClassDefContext, 0) as ClassDefContext;
-	}
-	public includeFile(): IncludeFileContext {
-		return this.getTypedRuleContext(IncludeFileContext, 0) as IncludeFileContext;
-	}
-	public HELP_LITERAL(): TerminalNode {
-		return this.getToken(bdsParser.HELP_LITERAL, 0);
-	}
-    public get ruleIndex(): number {
-    	return bdsParser.RULE_statement;
-	}
 	public enterRule(listener: bdsListener): void {
-	    if(listener.enterStatement) {
-	 		listener.enterStatement(this);
+	    if(listener.enterTryCatchFinally) {
+	 		listener.enterTryCatchFinally(this);
 		}
 	}
 	public exitRule(listener: bdsListener): void {
-	    if(listener.exitStatement) {
-	 		listener.exitStatement(this);
+	    if(listener.exitTryCatchFinally) {
+	 		listener.exitTryCatchFinally(this);
+		}
+	}
+}
+export class StatementExprContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterStatementExpr) {
+	 		listener.enterStatementExpr(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitStatementExpr) {
+	 		listener.exitStatementExpr(this);
+		}
+	}
+}
+export class ReturnContext extends StatementContext {
+	constructor(parser: bdsParser, ctx: StatementContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public eol_list(): EolContext[] {
+		return this.getTypedRuleContexts(EolContext) as EolContext[];
+	}
+	public eol(i: number): EolContext {
+		return this.getTypedRuleContext(EolContext, i) as EolContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterReturn) {
+	 		listener.enterReturn(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitReturn) {
+	 		listener.exitReturn(this);
 		}
 	}
 }
@@ -3879,28 +4834,471 @@ export class ForEndContext extends ParserRuleContext {
 
 
 export class ExpressionContext extends ParserRuleContext {
-	public _op!: Token;
 	constructor(parser?: bdsParser, parent?: ParserRuleContext, invokingState?: number) {
 		super(parent, invokingState);
     	this.parser = parser;
 	}
+    public get ruleIndex(): number {
+    	return bdsParser.RULE_expression;
+	}
+	public copyFrom(ctx: ExpressionContext): void {
+		super.copyFrom(ctx);
+	}
+}
+export class LiteralNullContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
 	public NULL_LITERAL(): TerminalNode {
 		return this.getToken(bdsParser.NULL_LITERAL, 0);
 	}
-	public BOOL_LITERAL(): TerminalNode {
-		return this.getToken(bdsParser.BOOL_LITERAL, 0);
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralNull) {
+	 		listener.enterLiteralNull(this);
+		}
 	}
-	public INT_LITERAL(): TerminalNode {
-		return this.getToken(bdsParser.INT_LITERAL, 0);
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralNull) {
+	 		listener.exitLiteralNull(this);
+		}
 	}
-	public REAL_LITERAL(): TerminalNode {
-		return this.getToken(bdsParser.REAL_LITERAL, 0);
+}
+export class LiteralStringContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
 	public STRING_LITERAL(): TerminalNode {
 		return this.getToken(bdsParser.STRING_LITERAL, 0);
 	}
 	public STRING_LITERAL_SINGLE(): TerminalNode {
 		return this.getToken(bdsParser.STRING_LITERAL_SINGLE, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralString) {
+	 		listener.enterLiteralString(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralString) {
+	 		listener.exitLiteralString(this);
+		}
+	}
+}
+export class ExpressionAssignmentListContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignmentList) {
+	 		listener.enterExpressionAssignmentList(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignmentList) {
+	 		listener.exitExpressionAssignmentList(this);
+		}
+	}
+}
+export class ExpressionDepOperatorContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionDepOperator) {
+	 		listener.enterExpressionDepOperator(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionDepOperator) {
+	 		listener.exitExpressionDepOperator(this);
+		}
+	}
+}
+export class ExpressionAssignmentBitAndContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignmentBitAnd) {
+	 		listener.enterExpressionAssignmentBitAnd(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignmentBitAnd) {
+	 		listener.exitExpressionAssignmentBitAnd(this);
+		}
+	}
+}
+export class ExpressionUnaryPlusMinusContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionUnaryPlusMinus) {
+	 		listener.enterExpressionUnaryPlusMinus(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionUnaryPlusMinus) {
+	 		listener.exitExpressionUnaryPlusMinus(this);
+		}
+	}
+}
+export class LiteralMapContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralMap) {
+	 		listener.enterLiteralMap(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralMap) {
+	 		listener.exitLiteralMap(this);
+		}
+	}
+}
+export class ExpressionBitNegationContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionBitNegation) {
+	 		listener.enterExpressionBitNegation(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionBitNegation) {
+	 		listener.exitExpressionBitNegation(this);
+		}
+	}
+}
+export class ExpressionAssignmentBitOrContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignmentBitOr) {
+	 		listener.enterExpressionAssignmentBitOr(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignmentBitOr) {
+	 		listener.exitExpressionAssignmentBitOr(this);
+		}
+	}
+}
+export class PostContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterPost) {
+	 		listener.enterPost(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitPost) {
+	 		listener.exitPost(this);
+		}
+	}
+}
+export class ExpressionTaskContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public statement(): StatementContext {
+		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionTask) {
+	 		listener.enterExpressionTask(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionTask) {
+	 		listener.exitExpressionTask(this);
+		}
+	}
+}
+export class ExpressionCastContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public ID(): TerminalNode {
+		return this.getToken(bdsParser.ID, 0);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionCast) {
+	 		listener.enterExpressionCast(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionCast) {
+	 		listener.exitExpressionCast(this);
+		}
+	}
+}
+export class ReferenceVarContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public ID(): TerminalNode {
+		return this.getToken(bdsParser.ID, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterReferenceVar) {
+	 		listener.enterReferenceVar(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitReferenceVar) {
+	 		listener.exitReferenceVar(this);
+		}
+	}
+}
+export class ExpressionTimesDivModContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionTimesDivMod) {
+	 		listener.enterExpressionTimesDivMod(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionTimesDivMod) {
+	 		listener.exitExpressionTimesDivMod(this);
+		}
+	}
+}
+export class ReferenceMapContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterReferenceMap) {
+	 		listener.enterReferenceMap(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitReferenceMap) {
+	 		listener.exitReferenceMap(this);
+		}
+	}
+}
+export class ExpressionLogicNotContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionLogicNot) {
+	 		listener.enterExpressionLogicNot(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionLogicNot) {
+	 		listener.exitExpressionLogicNot(this);
+		}
+	}
+}
+export class ExpressionSysContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public SYS_LITERAL(): TerminalNode {
+		return this.getToken(bdsParser.SYS_LITERAL, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionSys) {
+	 		listener.enterExpressionSys(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionSys) {
+	 		listener.exitExpressionSys(this);
+		}
+	}
+}
+export class ExpressionVariableInitImplicitContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public ID(): TerminalNode {
+		return this.getToken(bdsParser.ID, 0);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionVariableInitImplicit) {
+	 		listener.enterExpressionVariableInitImplicit(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionVariableInitImplicit) {
+	 		listener.exitExpressionVariableInitImplicit(this);
+		}
+	}
+}
+export class ExpressionAssignmentMultContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignmentMult) {
+	 		listener.enterExpressionAssignmentMult(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignmentMult) {
+	 		listener.exitExpressionAssignmentMult(this);
+		}
+	}
+}
+export class ExpressionDepContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public statement(): StatementContext {
+		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionDep) {
+	 		listener.enterExpressionDep(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionDep) {
+	 		listener.exitExpressionDep(this);
+		}
+	}
+}
+export class ExpressionAssignmentMinusContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignmentMinus) {
+	 		listener.enterExpressionAssignmentMinus(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignmentMinus) {
+	 		listener.exitExpressionAssignmentMinus(this);
+		}
+	}
+}
+export class ExpressionNewContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
 	public ID(): TerminalNode {
 		return this.getToken(bdsParser.ID, 0);
@@ -3911,26 +5309,501 @@ export class ExpressionContext extends ParserRuleContext {
 	public expression(i: number): ExpressionContext {
 		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
-	public SYS_LITERAL(): TerminalNode {
-		return this.getToken(bdsParser.SYS_LITERAL, 0);
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionNew) {
+	 		listener.enterExpressionNew(this);
+		}
 	}
-	public TASK_LITERAL(): TerminalNode {
-		return this.getToken(bdsParser.TASK_LITERAL, 0);
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionNew) {
+	 		listener.exitExpressionNew(this);
+		}
+	}
+}
+export class ExpressionAssignmentDivContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignmentDiv) {
+	 		listener.enterExpressionAssignmentDiv(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignmentDiv) {
+	 		listener.exitExpressionAssignmentDiv(this);
+		}
+	}
+}
+export class ReferenceListContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterReferenceList) {
+	 		listener.enterReferenceList(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitReferenceList) {
+	 		listener.exitReferenceList(this);
+		}
+	}
+}
+export class PreContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterPre) {
+	 		listener.enterPre(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitPre) {
+	 		listener.exitPre(this);
+		}
+	}
+}
+export class LiteralListEmptyContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralListEmpty) {
+	 		listener.enterLiteralListEmpty(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralListEmpty) {
+	 		listener.exitLiteralListEmpty(this);
+		}
+	}
+}
+export class ExpressionParallelContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
 	}
 	public statement(): StatementContext {
 		return this.getTypedRuleContext(StatementContext, 0) as StatementContext;
 	}
-    public get ruleIndex(): number {
-    	return bdsParser.RULE_expression;
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
 	}
 	public enterRule(listener: bdsListener): void {
-	    if(listener.enterExpression) {
-	 		listener.enterExpression(this);
+	    if(listener.enterExpressionParallel) {
+	 		listener.enterExpressionParallel(this);
 		}
 	}
 	public exitRule(listener: bdsListener): void {
-	    if(listener.exitExpression) {
-	 		listener.exitExpression(this);
+	    if(listener.exitExpressionParallel) {
+	 		listener.exitExpressionParallel(this);
+		}
+	}
+}
+export class ExpressionCompContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionComp) {
+	 		listener.enterExpressionComp(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionComp) {
+	 		listener.exitExpressionComp(this);
+		}
+	}
+}
+export class LiteralBoolContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public BOOL_LITERAL(): TerminalNode {
+		return this.getToken(bdsParser.BOOL_LITERAL, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralBool) {
+	 		listener.enterLiteralBool(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralBool) {
+	 		listener.exitLiteralBool(this);
+		}
+	}
+}
+export class ExpressionLogicOpContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionLogicOp) {
+	 		listener.enterExpressionLogicOp(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionLogicOp) {
+	 		listener.exitExpressionLogicOp(this);
+		}
+	}
+}
+export class ExpressionGoalContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionGoal) {
+	 		listener.enterExpressionGoal(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionGoal) {
+	 		listener.exitExpressionGoal(this);
+		}
+	}
+}
+export class ExpressionTaskLiteralContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public TASK_LITERAL(): TerminalNode {
+		return this.getToken(bdsParser.TASK_LITERAL, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionTaskLiteral) {
+	 		listener.enterExpressionTaskLiteral(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionTaskLiteral) {
+	 		listener.exitExpressionTaskLiteral(this);
+		}
+	}
+}
+export class ExpressionAssignmentContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignment) {
+	 		listener.enterExpressionAssignment(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignment) {
+	 		listener.exitExpressionAssignment(this);
+		}
+	}
+}
+export class ExpressionPlusMinusContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionPlusMinus) {
+	 		listener.enterExpressionPlusMinus(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionPlusMinus) {
+	 		listener.exitExpressionPlusMinus(this);
+		}
+	}
+}
+export class ReferenceFieldContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public ID(): TerminalNode {
+		return this.getToken(bdsParser.ID, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterReferenceField) {
+	 		listener.enterReferenceField(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitReferenceField) {
+	 		listener.exitReferenceField(this);
+		}
+	}
+}
+export class LiteralRealContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public REAL_LITERAL(): TerminalNode {
+		return this.getToken(bdsParser.REAL_LITERAL, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralReal) {
+	 		listener.enterLiteralReal(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralReal) {
+	 		listener.exitLiteralReal(this);
+		}
+	}
+}
+export class ExpressionBitOpContext extends ExpressionContext {
+	public _op!: Token;
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionBitOp) {
+	 		listener.enterExpressionBitOp(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionBitOp) {
+	 		listener.exitExpressionBitOp(this);
+		}
+	}
+}
+export class ExpressionAssignmentPlusContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionAssignmentPlus) {
+	 		listener.enterExpressionAssignmentPlus(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionAssignmentPlus) {
+	 		listener.exitExpressionAssignmentPlus(this);
+		}
+	}
+}
+export class FunctionCallContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public ID(): TerminalNode {
+		return this.getToken(bdsParser.ID, 0);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterFunctionCall) {
+	 		listener.enterFunctionCall(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitFunctionCall) {
+	 		listener.exitFunctionCall(this);
+		}
+	}
+}
+export class ExpressionParenContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression(): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, 0) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionParen) {
+	 		listener.enterExpressionParen(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionParen) {
+	 		listener.exitExpressionParen(this);
+		}
+	}
+}
+export class ExpressionCondContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterExpressionCond) {
+	 		listener.enterExpressionCond(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitExpressionCond) {
+	 		listener.exitExpressionCond(this);
+		}
+	}
+}
+export class LiteralListContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralList) {
+	 		listener.enterLiteralList(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralList) {
+	 		listener.exitLiteralList(this);
+		}
+	}
+}
+export class LiteralIntContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public INT_LITERAL(): TerminalNode {
+		return this.getToken(bdsParser.INT_LITERAL, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralInt) {
+	 		listener.enterLiteralInt(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralInt) {
+	 		listener.exitLiteralInt(this);
+		}
+	}
+}
+export class LiteralMapEmptyContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterLiteralMapEmpty) {
+	 		listener.enterLiteralMapEmpty(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitLiteralMapEmpty) {
+	 		listener.exitLiteralMapEmpty(this);
+		}
+	}
+}
+export class MethodCallContext extends ExpressionContext {
+	constructor(parser: bdsParser, ctx: ExpressionContext) {
+		super(parser, ctx.parentCtx, ctx.invokingState);
+		super.copyFrom(ctx);
+	}
+	public expression_list(): ExpressionContext[] {
+		return this.getTypedRuleContexts(ExpressionContext) as ExpressionContext[];
+	}
+	public expression(i: number): ExpressionContext {
+		return this.getTypedRuleContext(ExpressionContext, i) as ExpressionContext;
+	}
+	public ID(): TerminalNode {
+		return this.getToken(bdsParser.ID, 0);
+	}
+	public enterRule(listener: bdsListener): void {
+	    if(listener.enterMethodCall) {
+	 		listener.enterMethodCall(this);
+		}
+	}
+	public exitRule(listener: bdsListener): void {
+	    if(listener.exitMethodCall) {
+	 		listener.exitMethodCall(this);
 		}
 	}
 }

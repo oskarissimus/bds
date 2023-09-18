@@ -2,127 +2,146 @@ grammar bds;
 
 import bdsLexerRules;
 
+//------------------------------------------------------------------------------
+// Parser ------------------------------------------------------------------------------
+
+// Main program
 programUnit: eol* statement+ EOF;
+
+// End of line (semicolons are optional)
 eol: (';' | '\n')+;
+
+// Include statement
 includeFile:
 	'include' (STRING_LITERAL | STRING_LITERAL_SINGLE) eol;
+
+// Types
 typeList: type (',' type)*;
 
 type:
-	'bool'
-	| 'int'
-	| 'real'
-	| 'string'
-	| 'void'
-	| type '[' ']'
-	| type '{' '}'
-	| type '{' type '}'
-	| ID;
+	'bool'				# typeBool
+	| 'int'				# typeInt
+	| 'real'			# typeReal
+	| 'string'			# typeString
+	| 'void'			# typeVoid
+	| type '[' ']'		# typeArray
+	| type '{' '}'		# typeMap
+	| type '{' type '}'	# typeMap
+	| ID				# typeClass;
 
+// Variable declaration
 varDeclaration:
 	type variableInit (',' variableInit)*
 	| variableInitImplicit;
 variableInit: ID ('=' expression)? HELP_LITERAL?;
 variableInitImplicit: ID ':=' expression HELP_LITERAL?;
 
+// Function declaration
 functionDeclaration:
 	type ID '(' varDeclaration? (',' varDeclaration)* ')' statement;
 
-field: varDeclaration eol* | functionDeclaration eol*;
+// Class field definition
+field:
+	varDeclaration eol*			# fieldDeclaration
+	| functionDeclaration eol*	# methodDeclaration;
 
+// Class definition
 classDef:
 	'class' ID eol* ('extends' ID)? eol* '{' eol* field* '}';
 
+// Statements
 statement:
-	'{' statement* '}'
-	| 'break' eol*
-	| 'breakpoint' expression? eol*
-	| 'checkpoint' expression? eol*
-	| 'continue' eol*
-	| 'debug' expression? eol*
-	| 'exit' expression? eol*
-	| 'print' expression? eol*
-	| 'println' expression? eol*
-	| 'warning' expression? eol*
-	| 'error' expression? eol*
+	'{' statement* '}'				# block
+	| 'break' eol*					# break
+	| 'breakpoint' expression? eol*	# breakpoint
+	| 'checkpoint' expression? eol*	# checkpoint
+	| 'continue' eol*				# continue
+	| 'debug' expression? eol*		# debug
+	| 'exit' expression? eol*		# exit
+	| 'print' expression? eol*		# print
+	| 'println' expression? eol*	# println
+	| 'warning' expression? eol*	# warning
+	| 'error' expression? eol*		# error
 	| 'try' statement eol* (
 		'catch' '(' type ID ')' statement eol*
-	)* ('finally' statement eol*)?
-	| 'throw' expression eol*
-	| 'for' '(' (forInit)? ';' (forCondition)? ';' (end = forEnd)? ')' statement eol*
-	| 'for' '(' varDeclaration ':' expression ')' statement eol*
+	)* ('finally' statement eol*)?														# tryCatchFinally
+	| 'throw' expression eol*															# throw
+	| 'for' '(' (forInit)? ';' (forCondition)? ';' (end = forEnd)? ')' statement eol*	# forLoop
+	| 'for' '(' varDeclaration ':' expression ')' statement eol*						# forLoopList
 	| 'if' '(' expression ')' statement eol* (
 		'else' statement eol*
-	)?
-	| 'kill' expression eol*
-	| 'return' expression? eol*
-	| 'wait' (expression (',' expression)*)? eol*
+	)?												# if
+	| 'kill' expression eol*						# kill
+	| 'return' expression? eol*						# return
+	| 'wait' (expression (',' expression)*)? eol*	# wait
 	| 'switch' '(' expression? ')' '{' eol* (
 		'case' expression ':' statement* eol*
 	)* ('default' ':' statement*)? (
 		'case' expression ':' statement* eol*
-	)* '}' eol*
-	| 'while' '(' expression? ')' statement eol*
-	| functionDeclaration eol*
-	| varDeclaration eol*
-	| classDef eol*
-	| expression eol*
-	| includeFile eol*
-	| HELP_LITERAL
-	| eol;
+	)* '}' eol*										# switch
+	| 'while' '(' expression? ')' statement eol*	# while
+	| functionDeclaration eol*						# statementFunctionDeclaration
+	| varDeclaration eol*							# statementVarDeclaration
+	| classDef eol*									# classDeclaration
+	| expression eol*								# statementExpr
+	| includeFile eol*								# statementInclude
+	| HELP_LITERAL									# help
+	| eol											# statmentEol;
 
 forInit: varDeclaration | expressionList;
+
 forCondition: expression;
+
 forEnd: expressionList;
 
 expression:
-	NULL_LITERAL
-	| BOOL_LITERAL
-	| INT_LITERAL
-	| REAL_LITERAL
-	| STRING_LITERAL
-	| STRING_LITERAL_SINGLE
-	| expression '.' ID '(' (expression (',' expression)*)? ')'
-	| '(' ID ')' expression
-	| 'new' ID '(' (expression (',' expression)*)? ')'
-	| ID '(' (expression (',' expression)*)? ')'
-	| expression '.' ID
-	| ID
-	| expression '[' expression ']'
-	| expression '{' expression '}'
-	| op = ('++' | '--') expression
-	| expression op = ('++' | '--')
-	| '~' expression
-	| '!' expression
-	| expression op = ('*' | '/' | '%') expression
-	| expression op = ('+' | '-') expression
-	| expression op = ('<' | '<=' | '==' | '!=' | '>=' | '>') expression
-	| op = ('+' | '-') expression
-	| expression op = ('&' | '|' | '^') expression
-	| expression op = ('&&' | '||') expression
-	| '(' expression ')'
-	| expression '?' expression ':' expression
-	| expression '<-' expression
-	| '[' ']'
-	| '[' expression (',' expression)* ']'
-	| '{' '}'
+	NULL_LITERAL															# literalNull
+	| BOOL_LITERAL															# literalBool
+	| INT_LITERAL															# literalInt
+	| REAL_LITERAL															# literalReal
+	| STRING_LITERAL														# literalString
+	| STRING_LITERAL_SINGLE													# literalString
+	| expression '.' ID '(' (expression (',' expression)*)? ')'				# methodCall
+	| '(' ID ')' expression													# expressionCast
+	| 'new' ID '(' (expression (',' expression)*)? ')'						# expressionNew
+	| ID '(' (expression (',' expression)*)? ')'							# functionCall
+	| expression '.' ID														# referenceField
+	| ID																	# referenceVar
+	| expression '[' expression ']'											# referenceList
+	| expression '{' expression '}'											# referenceMap
+	| op = ('++' | '--') expression											# pre
+	| expression op = ('++' | '--')											# post
+	| '~' expression														# expressionBitNegation
+	| '!' expression														# expressionLogicNot
+	| expression op = ('*' | '/' | '%') expression							# expressionTimesDivMod
+	| expression op = ('+' | '-') expression								# expressionPlusMinus
+	| expression op = ('<' | '<=' | '==' | '!=' | '>=' | '>') expression	# expressionComp
+	| op = ('+' | '-') expression											# expressionUnaryPlusMinus
+	| expression op = ('&' | '|' | '^') expression							# expressionBitOp
+	| expression op = ('&&' | '||') expression								# expressionLogicOp
+	| '(' expression ')'													# expressionParen
+	| expression '?' expression ':' expression								# expressionCond
+	| expression '<-' expression											# expressionDepOperator
+	| '[' ']'																# literalListEmpty
+	| '[' expression (',' expression)* ']'									# literalList
+	| '{' '}'																# literalMapEmpty
 	| '{' expression '=>' expression (
 		',' expression '=>' expression
-	)* '}'
-	| SYS_LITERAL
-	| TASK_LITERAL
-	| 'task' ('(' expression (',' expression)* ')')? statement
-	| 'dep' '(' expression (',' expression)* ')' statement
-	| 'goal' expression
-	| ('par' | 'parallel') ('(' expression (',' expression)* ')')? statement
-	| expression '|=' expression
-	| expression '&=' expression
-	| expression '/=' expression
-	| expression '*=' expression
-	| expression '-=' expression
-	| expression '+=' expression
-	| '(' expression (',' expression)+ ')' '=' expression
-	| expression '=' expression
-	| ID ':=' expression;
+	)* '}'																		# literalMap
+	| SYS_LITERAL																# expressionSys
+	| TASK_LITERAL																# expressionTaskLiteral
+	| 'task' ('(' expression (',' expression)* ')')? statement					# expressionTask
+	| 'dep' '(' expression (',' expression)* ')' statement						# expressionDep
+	| 'goal' expression															# expressionGoal
+	| ('par' | 'parallel') ('(' expression (',' expression)* ')')? statement	# expressionParallel
+	| expression '|=' expression												# expressionAssignmentBitOr
+	| expression '&=' expression												# expressionAssignmentBitAnd
+	| expression '/=' expression												# expressionAssignmentDiv
+	| expression '*=' expression												# expressionAssignmentMult
+	| expression '-=' expression												# expressionAssignmentMinus
+	| expression '+=' expression												# expressionAssignmentPlus
+	| '(' expression (',' expression)+ ')' '=' expression						# expressionAssignmentList
+	| expression '=' expression													# expressionAssignment
+	| ID ':=' expression														# expressionVariableInitImplicit;
 
 expressionList: expression ( ',' expression)*;
