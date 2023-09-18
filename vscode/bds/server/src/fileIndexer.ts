@@ -10,6 +10,8 @@ import { fileURLToPath } from "url";
 import { glob } from "glob";
 import { SymbolTable } from "./symbolTable";
 import { SymbolReferenceTable } from "./symbolReference";
+import * as moment from "moment";
+import "moment-duration-format";
 
 type FileData = {
   path: string;
@@ -43,8 +45,9 @@ export class WorkspaceIndexer {
         const indexedFilesNumber = filePaths.indexOf(filePath) + 1;
         const totalFilesNumber = filePaths.length;
         const elapsed = Date.now() - start;
+        const formatted = moment.duration(elapsed).format("m[m] s[s] S[ms]");
         console.log(
-          `Indexed file ${filePath} (${indexedFilesNumber}/${totalFilesNumber}) in ${elapsed}ms.`
+          `Indexed file ${filePath} (${indexedFilesNumber}/${totalFilesNumber}) in ${formatted}.`
         );
       }
 
