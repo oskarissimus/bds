@@ -2,6 +2,7 @@ import {
   Connection,
   RemoteWorkspace,
   WorkspaceFolder,
+  combineConsoleFeatures,
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { promises as fs } from "fs";
@@ -14,6 +15,7 @@ type FileData = {
   path: string;
   content: string;
 };
+
 export class WorkspaceIndexer {
   constructor(
     private workspace: RemoteWorkspace,
@@ -24,6 +26,7 @@ export class WorkspaceIndexer {
   ) {}
 
   public async run(): Promise<void> {
+    const start = Date.now();
     try {
       this.connection.sendNotification(
         "custom/indexingStatus",
@@ -32,9 +35,18 @@ export class WorkspaceIndexer {
 
       const folders = await this.getFolders();
       const filePaths = this.findPaths(folders);
-      const files = await this.readFiles(filePaths);
-      const documents = this.buildDocuments(files);
-      this.indexFiles(documents);
+
+      for (const filePath of filePaths) {
+        const file = await this.readFile(filePath);
+        const document = this.buildDocument(file);
+        this.indexFile(document);
+        const indexedFilesNumber = filePaths.indexOf(filePath) + 1;
+        const totalFilesNumber = filePaths.length;
+        const elapsed = Date.now() - start;
+        console.log(
+          `Indexed file ${filePath} (${indexedFilesNumber}/${totalFilesNumber}) in ${elapsed}ms.`
+        );
+      }
 
       this.connection.sendNotification(
         "custom/indexingStatus",
@@ -88,30 +100,19 @@ export class WorkspaceIndexer {
       .flat();
   }
 
-  private async readFiles(filePaths: string[]): Promise<FileData[]> {
-    return Promise.all(
-      filePaths.map(async (filePath) => {
-        console.log(`Reading file ${filePath}...`);
-        return {
-          path: filePath,
-          content: await fs.readFile(filePath, "utf8"),
-        };
-      })
-    );
+  private async readFile(filePath: string): Promise<FileData> {
+    return {
+      path: filePath,
+      content: await fs.readFile(filePath, "utf8"),
+    };
   }
 
-  private buildDocuments(files: FileData[]): TextDocument[] {
-    return files.map((file) => {
-      console.log(`Building document ${file.path}...`);
-      return TextDocument.create(file.path, "bds", 1, file.content);
-    });
+  private buildDocument(file: FileData): TextDocument {
+    return TextDocument.create(file.path, "bds", 1, file.content);
   }
 
-  private indexFiles(documents: TextDocument[]): void {
-    documents.forEach((document) => {
-      console.log(`Indexing document ${document.uri}...`);
-      this.symbolDefinitionTable.indexDocument(document);
-      this.symbolReferenceTable.indexDocument(document);
-    });
+  private indexFile(document: TextDocument): void {
+    this.symbolDefinitionTable.indexDocument(document);
+    this.symbolReferenceTable.indexDocument(document);
   }
 }
