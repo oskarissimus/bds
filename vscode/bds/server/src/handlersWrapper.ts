@@ -74,9 +74,7 @@ class HandlersWrapper {
       textDocumentPosition.position,
       this.symbolTable
     );
-    console.log(symbol);
     if (!symbol) return null;
-    console.log(this.symbolTable);
     const symbolInfo = this.symbolTable.get(symbol);
     if (!symbolInfo) return null;
     return symbolInfo.location;
@@ -96,7 +94,6 @@ class HandlersWrapper {
     );
     if (!symbol) return [];
     this.symbolReferenceTable.indexDocument(document);
-    console.log(this.symbolReferenceTable);
     const symbolLocations = this.symbolReferenceTable.get(symbol);
     if (!symbolLocations) return [];
     return symbolLocations;

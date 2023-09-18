@@ -32,7 +32,6 @@ export class WorkspaceIndexer {
 
       const folders = await this.getFolders();
       const filePaths = this.findPaths(folders);
-      console.log(filePaths);
       const files = await this.readFiles(filePaths);
       const documents = this.buildDocuments(files);
       this.indexFiles(documents);
