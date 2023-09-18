@@ -8,6 +8,7 @@ import {
 import bdsParser, {
   ClassDefContext,
   ExpressionContext,
+  ExpressionNewContext,
   FunctionDeclarationContext,
   MethodCallContext,
   ReferenceVarContext,
@@ -29,6 +30,11 @@ export function getScopedSymbolFromAST(
     return getScopedSymbolFromMethodCall(methodCall, symbolTable);
   }
 
+  if (isTargetNodePartOfExpressionNew(targetNode)) {
+    const className = targetNode.getText();
+    return `${className}.${className}`;
+  }
+
   const parentFunctionName = findParentFunction(targetNode);
   const parentClassName = findParentClass(targetNode);
   let scopedSymbolName = targetNode.getText();
@@ -40,6 +46,20 @@ export function getScopedSymbolFromAST(
   }
 
   return scopedSymbolName;
+}
+
+function isTargetNodePartOfExpressionNew(node: ParserRuleContext): boolean {
+  let currentScope = node;
+
+  while (
+    currentScope &&
+    !(currentScope instanceof ExpressionNewContext) &&
+    currentScope.parentCtx
+  ) {
+    currentScope = currentScope.parentCtx;
+  }
+
+  return currentScope instanceof ExpressionNewContext;
 }
 
 function getParentMethodCall(node: ParserRuleContext): MethodCallContext {

@@ -10,6 +10,8 @@ import bdsParser, {
   VariableInitContext,
   VariableInitImplicitContext,
   ClassDefContext,
+  VarDeclarationContext,
+  TypeContext,
 } from "./grammar/bdsParser";
 import bdsListener from "./grammar/bdsListener";
 import { Location, Position, Range } from "vscode-languageserver";
@@ -67,6 +69,16 @@ class SymbolDefinitionListener extends bdsListener {
     }
     if (!inferredType) return;
     this._addSymbol(ctx.ID(), inferredType);
+  };
+
+  enterVarDeclaration = (ctx: VarDeclarationContext): void => {
+    const typeContext = ctx.type_();
+    if (!(typeContext instanceof TypeContext)) return;
+    const type: string = typeContext.getText();
+    ctx.variableInit_list().forEach((variableInit) => {
+      const id = variableInit.ID();
+      this._addSymbol(id, type);
+    });
   };
 
   private _addSymbol(token: TerminalNode, type: string): void {
