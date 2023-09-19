@@ -1,0 +1,201 @@
+{
+	"name": "BDS",
+	"patterns": [
+		{
+			"include": "#doubleQuotedString"
+		},
+		{
+			"include": "#singleQuotedString"
+		},
+		{
+			"include": "#newKeyword"
+		},
+		{
+			"include": "#keywordSpecial"
+		},
+		{
+			"include": "#keywordThis"
+		},
+		{
+			"include": "#booleanConstants"
+		},
+		{
+			"include": "#nullConstant"
+		},
+		{
+			"include": "#controlKeywords"
+		},
+		{
+			"include": "#blockComment"
+		},
+		{
+			"include": "#lineComment"
+		},
+		{
+			"include": "#lineHashComment"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#assignmentOperator"
+		},
+		{
+			"include": "#includeKeyword"
+		},
+		{
+			"include": "#numericFloat"
+		},
+		{
+			"include": "#numericInteger"
+		},
+		{
+			"include": "#classDefinition"
+		},
+		{
+			"include": "#extendsDefinition"
+		},
+		{
+			"include": "#functionCall"
+		},
+		{
+			"include": "#functionDefinition"
+		},
+		{
+			"include": "#basicTypes"
+		},
+		{
+			"include": "#classTypes"
+		},
+		{
+			"include": "#variables"
+		}
+	],
+	"repository": {
+		"identifier": {
+			"match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+			"name": "identifier.bds"
+		},
+		"basicTypes": {
+			"match": "\\b(bool|int|real|string|void)\\b",
+			"name": "storage.type.bds"
+		},
+		"classDefinition": {
+			"begin": "\\bclass\\b",
+			"end": "\\s+([A-Za-z_][A-Za-z0-9_]*)",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.control.bds"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "entity.name.class.bds"
+				}
+			}
+		},
+		"extendsDefinition": {
+			"begin": "\\bextends\\b\\s+",
+			"end": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b",
+			"beginCaptures": {
+				"0": {
+					"name": "keyword.control.inheritance.bds"
+				}
+			},
+			"endCaptures": {
+				"1": {
+					"name": "entity.name.class.inherited.bds"
+				}
+			}
+		},
+		"functionDefinition": {
+			"begin": "\\b(?:(bool|int|real|string|void)\\b)?\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"1": {
+					"name": "storage.type.bds"
+				},
+				"2": {
+					"name": "entity.name.function.bds"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#basicTypes"
+				},
+				{
+					"match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*[,\\)])",
+					"name": "entity.name.type.class.bds"
+				},
+				{
+					"match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s*[,=\\)])",
+					"name": "variable.bds"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.parameter.bds"
+				}
+			]
+		},
+		"classTypes": {
+			"match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*)",
+			"name": "entity.name.type.class.bds"
+		},
+		"variables": {
+			"match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?![\\s]*\\()",
+			"name": "variable.bds"
+		},
+		"functionCall": {
+			"begin": "\\b(this)?\\.?([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"1": {
+					"name": "variable.language.this.bds"
+				},
+				"2": {
+					"name": "entity.name.function.call.bds"
+				}
+			},
+			"patterns": [
+				{
+					"include": "#keywordThis"
+				},
+				{
+					"include": "#numericFloat"
+				},
+				{
+					"include": "#numericInteger"
+				},
+				{
+					"include": "#functionCall"
+				},
+				{
+					"match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+					"name": "variable.parameter.function.bds"
+				},
+				{
+					"include": "#doubleQuotedString"
+				},
+				{
+					"include": "#singleQuotedString"
+				},
+				{
+					"match": ",",
+					"name": "punctuation.separator.parameter.bds"
+				}
+			]
+		},
+		"newKeyword": {
+			"match": "\\bnew\\b\\s+([A-Za-z_][A-Za-z0-9_]*)",
+			"captures": {
+				"0": {
+					"name": "keyword.control.new.bds"
+				},
+				"1": {
+					"name": "entity.name.class.instantiation.bds"
+				}
+			}
+		}
+	},
+	"scopeName": "source.bds"
+}

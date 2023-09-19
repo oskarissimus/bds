@@ -1,0 +1,10 @@
+{
+    "numericFloat": {
+        "match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
+        "name": "constant.numeric.float.bds"
+    },
+    "numericInteger": {
+        "match": "\\b-?\\d+",
+        "name": "constant.numeric.integer.bds"
+    }
+}

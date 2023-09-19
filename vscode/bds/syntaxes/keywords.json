@@ -1,0 +1,34 @@
+{
+    "keywordSpecial": {
+        "match": "\\bsuper\\b",
+        "name": "keyword.special.super.bds"
+    },
+    "keywordThis": {
+        "match": "\\bthis\\b",
+        "name": "keyword.this.bds"
+    },
+    "booleanConstants": {
+        "match": "\\b(true|false)\\b",
+        "name": "constant.language.boolean.bds"
+    },
+    "nullConstant": {
+        "match": "\\bnull\\b",
+        "name": "constant.language.null.bds"
+    },
+    "controlKeywords": {
+        "match": "\\b(if|else|for|while|try|catch|finally|throw|return|break|breakpoint|checkpoint|debug|exit|print|println|warning|error|kill|wait|switch|task|dep|goal|par|parallel|continue)\\b",
+        "name": "keyword.control.bds"
+    },
+    "includeKeyword": {
+        "match": "\\binclude\\b",
+        "name": "keyword.declaration.bds"
+    },
+    "operators": {
+        "match": "[-+*/%&|<>!=]|\\+\\+|--|\\|=|&=|/=|\\*=|-=|\\+=|<-|=>",
+        "name": "keyword.operator.bds"
+    },
+    "assignmentOperator": {
+        "match": ":=",
+        "name": "keyword.control.type.inference.bds"
+    }
+}

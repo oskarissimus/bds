@@ -25,3 +25,4 @@ vscode/bds/release
 *.vsix
 vscode/bds/server/out
 vscode/bds/client/out
+vscode/bds/server/src/grammar/.antlr

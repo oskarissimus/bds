@@ -1,0 +1,15 @@
+{
+    "blockComment": {
+        "begin": "/\\*",
+        "end": "\\*/",
+        "name": "comment.block.bds"
+    },
+    "lineComment": {
+        "match": "//.*",
+        "name": "comment.line.bds"
+    },
+    "lineHashComment": {
+        "match": "#.*",
+        "name": "comment.line.hash.bds"
+    }
+}

@@ -1,6 +1,6 @@
 {
     "name": "bds-extension",
-    "version": "0.2.6",
+    "version": "0.3.11",
     "description": "VS Code extension for BDS Language",
     "main": "./client/out/extension",
     "activationEvents": [
@@ -12,8 +12,9 @@
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
-        "compile": "tsc -b",
-        "watch": "tsc -b -w",
+        "merge-grammar": "node syntaxes/mergeGrammar.js",
+        "compile": "npm run merge-grammar && tsc -b",
+        "watch": "nodemon -e json --watch ./syntaxes --exec \"npm run merge-grammar\" & tsc -b -w",
         "postinstall": "cd client && npm install && cd ../server && npm install && cd ..",
         "test": "jest --coverage"
     },
@@ -31,7 +32,7 @@
                     "BDS",
                     "bds"
                 ],
-                "configuration": "./language-configuration"
+                "configuration": "./language-configuration.json"
             }
         ],
         "grammars": [
@@ -40,7 +41,17 @@
                 "scopeName": "source.bds",
                 "path": "./syntaxes/bds.tmLanguage.json"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "BDS Language Configuration",
+            "properties": {
+                "bds-extension.sourceRootDirectory": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Specify the source root directory for the BDS language server."
+                }
+            }
+        }
     },
     "devDependencies": {
         "@types/jest": "^29.5.3",

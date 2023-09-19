@@ -1,267 +1,276 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "bds",
-	"patterns": [
-		{
-			"include": "#code"
-		}
-	],
-	"repository": {
-		"code": {
-			"patterns": [
-				{
-					"include": "#comments-inline-hash"
-				},
-				{
-					"include": "#comments-inline-help"
-				},
-				{
-					"include": "#comments-inline-shebang"
-				},
-				{
-					"include": "#comments-inline-slash"
-				},
-				{
-					"include": "#comments-multi-line"
-				},
-				{
-					"include": "#this"
-				},
-				{
-					"include": "#function-call"
-				},
-				{
-					"include": "#field"
-				},
-				{
-					"include": "#new"
-				},
-				{
-					"include": "#keywords"
-				},
-				{
-					"include": "#strings-double"
-				},
-				{
-					"include": "#strings-single"
-				},
-				{
-					"include": "#numbers"
-				},
-				{
-					"include": "#sys"
-				},
-				{
-					"include": "#test"
-				}
-			]
-		},
-		"comments-inline-hash": {
-			"name": "comment.line.hash.bds",
-			"begin": "#",
-			"end": "$"
-		},
-		"comments-inline-help": {
-			"name": "string.literal.help",
-			"begin": "\\s*(help)\\s+",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.help.bds"
-				}
-			},
-			"end": "$"
-		},
-		"comments-inline-shebang": {
-			"name": "punctuation.section.embedded",
-			"begin": "^#!",
-			"end": "$"
-		},
-		"comments-inline-slash": {
-			"name": "comment.line.slash.bds",
-			"begin": "\\s*//",
-			"end": "$"
-		},
-		"comments-multi-line": {
-			"name": "comment.multi.line.bds",
-			"begin": "\\s*\\/\\*",
-			"end": "\\*/"
-		},
-		"keywords": {
-			"patterns": [
-				{
-					"match": "\\bthrow\\b",
-					"name": "keyword.control.throw.bds"
-				},
-				{
-					"match": "\\b(breakpoint|case|catch|checkpoint|class|continue|debug|default|dep|else|exit|extends|finally|for|goal|if|include|print|println|return|switch|task|try|wait|while)\\b",
-					"name": "keyword.control.bds"
-				},
-				{
-					"match": "\\b(args|allowEmpty|canFail|cpus|cpusLocal|mem|node|ppwd|programName|programPath|programPid|queue|retry|system|taskName|timeout|walltimeout)\\b",
-					"name": "keyword.variable.name.bds"
-				},
-				{
-					"match": "\\b(K|M|G|T|P|E|PI|minute|hour|day|week)\\b",
-					"name": "keyword.variable.name.bds"
-				},
-				{
-					"match": "\\b(int|bool|string|void|real)\\b",
-					"name": "keyword.control.bds"
-				},
-				{
-					"match": "\\b(true|false)\\b",
-					"name": "variable.other.constant"
-				},
-				{
-					"match": "<-",
-					"name": "keyword.control.dep"
-				},
-				{
-					"match": "(<<|>>>?|~|\\^)",
-					"name": "keyword.operator.bitwise.bds"
-				},
-				{
-					"match": "((&|\\^|\\||<<|>>>?)=)",
-					"name": "keyword.operator.assignment.bitwise.bds"
-				},
-				{
-					"match": "(===?|!=|<=|>=|<>|<|>)",
-					"name": "keyword.operator.comparison.bds"
-				},
-				{
-					"match": "([+*/%-]=)",
-					"name": "keyword.operator.assignment.arithmetic.bds"
-				},
-				{
-					"match": ":=",
-					"name": "keyword.control.type.inference"
-				},
-				{
-					"match": "=",
-					"name": "keyword.operator.assignment"
-				},
-				{
-					"match": "\\?|:",
-					"name": "keyword.control.ternary.bds"
-				},
-				{
-					"match": "(\\-\\-|\\+\\+)",
-					"name": "keyword.operator.increment-decrement.bds"
-				},
-				{
-					"match": "(\\-|\\+|\\*|\\/|%)",
-					"name": "keyword.operator.arithmetic.bds"
-				},
-				{
-					"match": "(!|&&|\\|\\|)",
-					"name": "keyword.operator.logical.bds"
-				},
-				{
-					"match": "(\\||&)",
-					"name": "keyword.operator.bitwise.bds"
-				}
-			]
-		},
-		"field": {
-			"name": "entity.name.variable",
-			"match": "(\\w+)(\\.\\w+)+"
-		},
-		"function-call": {
-			"name": "entity.name.function",
-			"begin": "(?!(if|for|task|while))(\\w+)(\\.\\w+)*\\(",
-			"patterns": [
-				{
-					"include": "#code"
-				}
-			],
-			"end": "\\)"
-		},
-		"new": {
-			"name": "meta.new.bds",
-			"begin": "\\b(new)\\s+(\\w+)\\(",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.new"
-				},
-				"2": {
-					"name": "entity.name.class"
-				}
-			},
-			"patterns": [
-				{
-					"include": "#code"
-				}
-			],
-			"end": "\\)"
-		},
-		"numbers": {
-			"patterns": [
-				{
-					"match": "(?x)\n\\b(?<!\\$)\n0(x|X)\n(\n  (?<!\\.)[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?[Ll]?(?!\\.)\n  |\n  (\n    [0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\\.?\n    |\n    ([0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?)?\\.[0-9a-fA-F]([0-9a-fA-F_]*[0-9a-fA-F])?\n  )\n  [Pp][+-]?[0-9]([0-9_]*[0-9])?[FfDd]?\n)\n\\b(?!\\$)",
-					"name": "constant.numeric.hex.bds"
-				},
-				{
-					"match": "\\b(?<!\\$)0(b|B)[01]([01_]*[01])?[Ll]?\\b(?!\\$)",
-					"name": "constant.numeric.binary.bds"
-				},
-				{
-					"match": "\\b(?<!\\$)0[0-7]([0-7_]*[0-7])?[Ll]?\\b(?!\\$)",
-					"name": "constant.numeric.octal.bds"
-				},
-				{
-					"match": "(?x)\n(?<!\\$)\n(\n  \\b[0-9]([0-9_]*[0-9])?\\.\\B(?!\\.)\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?\\.([0-9]([0-9_]*[0-9])?)([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  (?<!\\.)\\B\\.[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)[FfDd]?\\b\n  |\n  \\b[0-9]([0-9_]*[0-9])?([Ee][+-]?[0-9]([0-9_]*[0-9])?)?[FfDd]\\b\n  |\n  \\b(0|[1-9]([0-9_]*[0-9])?)(?!\\.)[Ll]?\\b\n)\n(?!\\$)",
-					"name": "constant.numeric.decimal.bds"
-				}
-			]
-		},
-		"strings-double": {
-			"name": "string.quoted.double.bds",
-			"begin": "\"",
-			"patterns": [
-				{
-					"name": "entity.name.variable",
-					"match": "\\$[\\w\\.\\[\\]\\{\\}\\$\\']*"
-				}
-			],
-			"end": "\""
-		},
-		"strings-single": {
-			"name": "string.quoted.single.bds",
-			"begin": "'",
-			"end": "'"
-		},
-		"sys": {
-			"name": "string.sys.command",
-			"begin": "\\s*(sys|task)\\b\\s+",
-			"beginCaptures": {
-				"1": {
-					"name": "keyword.control.sys.bare"
-				}
-			},
-			"patterns": [
-				{
-					"name": "entity.name.variable",
-					"match": "\\$[\\w\\.\\[\\]\\{\\}\\$\\']*"
-				}
-			],
-			"end": "[^\\\\](\\r)?\\n"
-		},
-		"this": {
-			"name": "meta.field.bds",
-			"match": "\\b(this\\.)([\\.\\w]+)",
-			"captures": {
-				"1": {
-					"name": "keyword.control.this"
-				},
-				"2": {
-					"name": "entity.name.variable"
-				}
-			}
-		},
-		"test": {
-			"name": "debug",
-			"match": "(zzz)"
-		}
-	},
-	"scopeName": "source.bds"
+    "name": "BDS",
+    "patterns": [
+        {
+            "include": "#doubleQuotedString"
+        },
+        {
+            "include": "#singleQuotedString"
+        },
+        {
+            "include": "#newKeyword"
+        },
+        {
+            "include": "#keywordSpecial"
+        },
+        {
+            "include": "#keywordThis"
+        },
+        {
+            "include": "#booleanConstants"
+        },
+        {
+            "include": "#nullConstant"
+        },
+        {
+            "include": "#controlKeywords"
+        },
+        {
+            "include": "#blockComment"
+        },
+        {
+            "include": "#lineComment"
+        },
+        {
+            "include": "#lineHashComment"
+        },
+        {
+            "include": "#operators"
+        },
+        {
+            "include": "#assignmentOperator"
+        },
+        {
+            "include": "#includeKeyword"
+        },
+        {
+            "include": "#numericFloat"
+        },
+        {
+            "include": "#numericInteger"
+        },
+        {
+            "include": "#classDefinition"
+        },
+        {
+            "include": "#extendsDefinition"
+        },
+        {
+            "include": "#functionCall"
+        },
+        {
+            "include": "#functionDefinition"
+        },
+        {
+            "include": "#basicTypes"
+        },
+        {
+            "include": "#classTypes"
+        },
+        {
+            "include": "#variables"
+        }
+    ],
+    "repository": {
+        "identifier": {
+            "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+            "name": "identifier.bds"
+        },
+        "basicTypes": {
+            "match": "\\b(bool|int|real|string|void)\\b",
+            "name": "storage.type.bds"
+        },
+        "classDefinition": {
+            "begin": "\\bclass\\b",
+            "end": "\\s+([A-Za-z_][A-Za-z0-9_]*)",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.bds"
+                }
+            },
+            "endCaptures": {
+                "1": {
+                    "name": "entity.name.class.bds"
+                }
+            }
+        },
+        "extendsDefinition": {
+            "begin": "\\bextends\\b\\s+",
+            "end": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b",
+            "beginCaptures": {
+                "0": {
+                    "name": "keyword.control.inheritance.bds"
+                }
+            },
+            "endCaptures": {
+                "1": {
+                    "name": "entity.name.class.inherited.bds"
+                }
+            }
+        },
+        "functionDefinition": {
+            "begin": "\\b(?:(bool|int|real|string|void)\\b)?\\s*([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "storage.type.bds"
+                },
+                "2": {
+                    "name": "entity.name.function.bds"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#basicTypes"
+                },
+                {
+                    "match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*[,\\)])",
+                    "name": "entity.name.type.class.bds"
+                },
+                {
+                    "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s*[,=\\)])",
+                    "name": "variable.bds"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.parameter.bds"
+                }
+            ]
+        },
+        "classTypes": {
+            "match": "\\b(?!(bool|int|real|string|void)\\b)[A-Za-z_][A-Za-z0-9_]*\\b(?=\\s+[A-Za-z_][A-Za-z0-9_]*)",
+            "name": "entity.name.type.class.bds"
+        },
+        "variables": {
+            "match": "\\b([A-Za-z_][A-Za-z0-9_]*)\\b(?![\\s]*\\()",
+            "name": "variable.bds"
+        },
+        "functionCall": {
+            "begin": "\\b(this)?\\.?([A-Za-z_][A-Za-z0-9_]*)\\s*\\(",
+            "end": "\\)",
+            "beginCaptures": {
+                "1": {
+                    "name": "variable.language.this.bds"
+                },
+                "2": {
+                    "name": "entity.name.function.call.bds"
+                }
+            },
+            "patterns": [
+                {
+                    "include": "#keywordThis"
+                },
+                {
+                    "include": "#numericFloat"
+                },
+                {
+                    "include": "#numericInteger"
+                },
+                {
+                    "include": "#functionCall"
+                },
+                {
+                    "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+                    "name": "variable.parameter.function.bds"
+                },
+                {
+                    "include": "#doubleQuotedString"
+                },
+                {
+                    "include": "#singleQuotedString"
+                },
+                {
+                    "match": ",",
+                    "name": "punctuation.separator.parameter.bds"
+                }
+            ]
+        },
+        "newKeyword": {
+            "match": "\\bnew\\b\\s+([A-Za-z_][A-Za-z0-9_]*)",
+            "captures": {
+                "0": {
+                    "name": "keyword.control.new.bds"
+                },
+                "1": {
+                    "name": "entity.name.class.instantiation.bds"
+                }
+            }
+        },
+        "blockComment": {
+            "begin": "/\\*",
+            "end": "\\*/",
+            "name": "comment.block.bds"
+        },
+        "lineComment": {
+            "match": "//.*",
+            "name": "comment.line.bds"
+        },
+        "lineHashComment": {
+            "match": "#.*",
+            "name": "comment.line.hash.bds"
+        },
+        "keywordSpecial": {
+            "match": "\\bsuper\\b",
+            "name": "keyword.special.super.bds"
+        },
+        "keywordThis": {
+            "match": "\\bthis\\b",
+            "name": "keyword.this.bds"
+        },
+        "booleanConstants": {
+            "match": "\\b(true|false)\\b",
+            "name": "constant.language.boolean.bds"
+        },
+        "nullConstant": {
+            "match": "\\bnull\\b",
+            "name": "constant.language.null.bds"
+        },
+        "controlKeywords": {
+            "match": "\\b(if|else|for|while|try|catch|finally|throw|return|break|breakpoint|checkpoint|debug|exit|print|println|warning|error|kill|wait|switch|task|dep|goal|par|parallel|continue)\\b",
+            "name": "keyword.control.bds"
+        },
+        "includeKeyword": {
+            "match": "\\binclude\\b",
+            "name": "keyword.declaration.bds"
+        },
+        "operators": {
+            "match": "[-+*/%&|<>!=]|\\+\\+|--|\\|=|&=|/=|\\*=|-=|\\+=|<-|=>",
+            "name": "keyword.operator.bds"
+        },
+        "assignmentOperator": {
+            "match": ":=",
+            "name": "keyword.control.type.inference.bds"
+        },
+        "numericFloat": {
+            "match": "\\b-?\\d+\\.?\\d*([eE][-+]?\\d+)?",
+            "name": "constant.numeric.float.bds"
+        },
+        "numericInteger": {
+            "match": "\\b-?\\d+",
+            "name": "constant.numeric.integer.bds"
+        },
+        "doubleQuotedString": {
+            "begin": "\"",
+            "end": "\"",
+            "name": "string.quoted.double.bds",
+            "patterns": [
+                {
+                    "match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+                    "name": "variable.interpolation.bds"
+                }
+            ]
+        },
+        "singleQuotedString": {
+            "begin": "'",
+            "end": "'",
+            "name": "string.quoted.single.bds",
+            "patterns": [
+                {
+                    "match": "\\$[A-Za-z_][A-Za-z0-9_]*",
+                    "name": "variable.interpolation.bds"
+                }
+            ]
+        }
+    },
+    "scopeName": "source.bds"
 }

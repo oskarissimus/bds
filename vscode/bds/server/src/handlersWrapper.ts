@@ -2,38 +2,40 @@ import {
   InitializeParams,
   InitializeResult,
   DefinitionParams,
-  ReferenceParams,
   Definition,
-  Location,
   Connection,
   TextDocumentSyncKind,
   TextDocumentChangeEvent,
   TextDocuments,
   ClientCapabilities,
+  ReferenceParams,
+  Location,
+  ConfigurationParams,
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
-import { getLocationByType } from "./symbolLocation";
 import { WorkspaceIndexer } from "./fileIndexer";
-import { IndexType, SymbolIndex } from "./symbolIndex";
-import { DocumentParser } from "./defaultDocumentParser";
+import { Validator } from "./Validator";
+import { getScopedSymbolFromAST } from "./getScopedSymbolFromAST";
+import { SymbolTable } from "./symbolTable";
+import { SymbolReferenceTable } from "./symbolReference";
 
 class HandlersWrapper {
   private clientCapabilities: ClientCapabilities = {};
   private connection: Connection;
   private documents: TextDocuments<TextDocument>;
-  private symbolindex: SymbolIndex;
-  private parser: DocumentParser;
+  private symbolTable: SymbolTable;
+  private symbolReferenceTable: SymbolReferenceTable;
 
   constructor(
     connection: Connection,
     documents: TextDocuments<TextDocument>,
-    symbolIndex: SymbolIndex,
-    parser: DocumentParser
+    symbolTable: SymbolTable,
+    symbolReferenceTable: SymbolReferenceTable
   ) {
     this.connection = connection;
     this.documents = documents;
-    this.symbolindex = symbolIndex;
-    this.parser = parser;
+    this.symbolTable = symbolTable;
+    this.symbolReferenceTable = symbolReferenceTable;
   }
   handleInitialize(params: InitializeParams): InitializeResult {
     this.clientCapabilities = params.capabilities;
@@ -50,46 +52,55 @@ class HandlersWrapper {
     const indexer = new WorkspaceIndexer(
       this.connection.workspace,
       this.clientCapabilities.workspace?.workspaceFolders,
-      this.symbolindex,
-      this.parser,
-      this.connection
+      this.symbolTable,
+      this.symbolReferenceTable,
+      this.connection,
+      new Validator(this.connection)
     );
     indexer.run();
   }
 
   handleDocumentChange(change: TextDocumentChangeEvent<TextDocument>): void {
-    const parsedResults = this.parser.parse(change.document);
-    this.symbolindex.indexDocument(change.document.uri, parsedResults);
+    this.symbolTable.indexDocument(change.document);
+    this.symbolReferenceTable.indexDocument(change.document);
   }
 
   handleDefinition(textDocumentPosition: DefinitionParams): Definition | null {
     const document: TextDocument | undefined = this.documents.get(
       textDocumentPosition.textDocument.uri
     );
-    return document
-      ? getLocationByType(
-          document,
-          textDocumentPosition.position,
-          this.symbolindex,
-          IndexType.Definition
-        )
-      : null;
+
+    if (!document) return null;
+    const code = document.getText();
+    const symbol = getScopedSymbolFromAST(
+      code,
+      textDocumentPosition.position,
+      this.symbolTable
+    );
+    if (!symbol) return null;
+    const symbolInfo = this.symbolTable.get(symbol);
+    if (!symbolInfo) return null;
+    return symbolInfo.location;
   }
 
-  handleReferences(textDocumentPosition: ReferenceParams): Location[] | null {
+  handleReferences(textDocumentPosition: ReferenceParams): Location[] {
     const document: TextDocument | undefined = this.documents.get(
       textDocumentPosition.textDocument.uri
     );
-    return document
-      ? getLocationByType(
-          document,
-          textDocumentPosition.position,
-          this.symbolindex,
-          IndexType.Reference
-        )
-      : null;
-  }
 
+    if (!document) return [];
+    const code = document.getText();
+    const symbol = getScopedSymbolFromAST(
+      code,
+      textDocumentPosition.position,
+      this.symbolTable
+    );
+    if (!symbol) return [];
+    this.symbolReferenceTable.indexDocument(document);
+    const symbolLocations = this.symbolReferenceTable.get(symbol);
+    if (!symbolLocations) return [];
+    return symbolLocations;
+  }
   registerHandlers() {
     this.connection.onInitialize(this.handleInitialize.bind(this));
     this.connection.onInitialized(this.handleInitialized.bind(this));
