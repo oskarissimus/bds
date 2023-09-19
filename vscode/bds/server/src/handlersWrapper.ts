@@ -14,6 +14,7 @@ import {
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { WorkspaceIndexer } from "./fileIndexer";
+import { Validator } from "./Validator";
 import { getScopedSymbolFromAST } from "./getScopedSymbolFromAST";
 import { SymbolTable } from "./symbolTable";
 import { SymbolReferenceTable } from "./symbolReference";
@@ -53,7 +54,8 @@ class HandlersWrapper {
       this.clientCapabilities.workspace?.workspaceFolders,
       this.symbolTable,
       this.symbolReferenceTable,
-      this.connection
+      this.connection,
+      new Validator(this.connection)
     );
     indexer.run();
   }

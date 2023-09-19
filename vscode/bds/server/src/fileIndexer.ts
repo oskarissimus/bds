@@ -12,10 +12,10 @@ import "moment-duration-format";
 import {
   readFile,
   buildDocument,
-  isSourceRootDirectoryValid,
   getPathsFromRootDirectory,
   getPathsFromWorkspaceFolders,
 } from "./fileIndexerUtils";
+import { Validator } from "./Validator";
 export type FileData = {
   path: string;
   content: string;
@@ -27,7 +27,8 @@ export class WorkspaceIndexer {
     private supportsWorkspaceFolders: boolean | undefined,
     private symbolDefinitionTable: SymbolTable,
     private symbolReferenceTable: SymbolReferenceTable,
-    private connection: Connection
+    private connection: Connection,
+    private validator: Validator
   ) {}
 
   private async getSourceRootDirectory() {
@@ -75,39 +76,18 @@ export class WorkspaceIndexer {
   }
 
   private async getFolders(): Promise<WorkspaceFolder[]> {
-    if (!this.supportsWorkspaceFolders) {
-      this.connection.sendNotification(
-        "custom/showErrorMessage",
-        "Workspace folders are not supported by this extension."
-      );
-      throw new Error("Workspace folders not supported");
-    }
-
+    this.validator.validateWorkspaceFoldersSupport(
+      this.supportsWorkspaceFolders
+    );
     const folders = await this.workspace.getWorkspaceFolders();
-
-    if (folders === null) {
-      this.connection.sendNotification(
-        "custom/showErrorMessage",
-        "Unable to retrieve workspace folders."
-      );
-      throw new Error("Failed to retrieve workspace folders");
-    }
-
-    if (folders.length === 0) {
-      this.connection.sendNotification(
-        "custom/showErrorMessage",
-        "There are no workspace folders open."
-      );
-      throw new Error("No workspace folders open");
-    }
-
-    return folders;
+    const validated = this.validator.validateRetrievedFolders(folders);
+    return validated;
   }
 
   private async findPaths(folders: WorkspaceFolder[]): Promise<string[]> {
     const sourceRootDirectory = await this.getSourceRootDirectory();
 
-    if (isSourceRootDirectoryValid(sourceRootDirectory, this.connection)) {
+    if (this.validator.isSourceRootDirectoryValid(sourceRootDirectory)) {
       return getPathsFromRootDirectory(sourceRootDirectory);
     } else {
       return getPathsFromWorkspaceFolders(folders);
