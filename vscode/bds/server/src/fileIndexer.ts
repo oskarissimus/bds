@@ -2,18 +2,21 @@ import {
   Connection,
   RemoteWorkspace,
   WorkspaceFolder,
-  combineConsoleFeatures,
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
-import { promises as fs } from "fs";
-import { fileURLToPath } from "url";
-import { glob } from "glob";
 import { SymbolTable } from "./symbolTable";
 import { SymbolReferenceTable } from "./symbolReference";
 import * as moment from "moment";
 import "moment-duration-format";
 
-type FileData = {
+import {
+  readFile,
+  buildDocument,
+  isSourceRootDirectoryValid,
+  getPathsFromRootDirectory,
+  getPathsFromWorkspaceFolders,
+} from "./fileIndexerUtils";
+export type FileData = {
   path: string;
   content: string;
 };
@@ -27,6 +30,13 @@ export class WorkspaceIndexer {
     private connection: Connection
   ) {}
 
+  private async getSourceRootDirectory() {
+    const config = await this.connection.workspace.getConfiguration(
+      "bds-extension"
+    );
+    return config.sourceRootDirectory;
+  }
+
   public async run(): Promise<void> {
     const start = Date.now();
     try {
@@ -36,11 +46,11 @@ export class WorkspaceIndexer {
       );
 
       const folders = await this.getFolders();
-      const filePaths = this.findPaths(folders);
+      const filePaths = await this.findPaths(folders);
 
       for (const filePath of filePaths) {
-        const file = await this.readFile(filePath);
-        const document = this.buildDocument(file);
+        const file = await readFile(filePath);
+        const document = buildDocument(file);
         this.indexFile(document);
         const indexedFilesNumber = filePaths.indexOf(filePath) + 1;
         const totalFilesNumber = filePaths.length;
@@ -94,24 +104,14 @@ export class WorkspaceIndexer {
     return folders;
   }
 
-  private findPaths(folders: WorkspaceFolder[]): string[] {
-    return folders
-      .map((folder) => {
-        const folderPath = fileURLToPath(folder.uri);
-        return glob.sync(folderPath + "/**/*.bds", { follow: true });
-      })
-      .flat();
-  }
+  private async findPaths(folders: WorkspaceFolder[]): Promise<string[]> {
+    const sourceRootDirectory = await this.getSourceRootDirectory();
 
-  private async readFile(filePath: string): Promise<FileData> {
-    return {
-      path: filePath,
-      content: await fs.readFile(filePath, "utf8"),
-    };
-  }
-
-  private buildDocument(file: FileData): TextDocument {
-    return TextDocument.create(file.path, "bds", 1, file.content);
+    if (isSourceRootDirectoryValid(sourceRootDirectory, this.connection)) {
+      return getPathsFromRootDirectory(sourceRootDirectory);
+    } else {
+      return getPathsFromWorkspaceFolders(folders);
+    }
   }
 
   private indexFile(document: TextDocument): void {

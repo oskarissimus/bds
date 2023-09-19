@@ -10,6 +10,7 @@ import {
   ClientCapabilities,
   ReferenceParams,
   Location,
+  ConfigurationParams,
 } from "vscode-languageserver/node";
 import { TextDocument } from "vscode-languageserver-textdocument";
 import { WorkspaceIndexer } from "./fileIndexer";
