@@ -38,14 +38,31 @@ export class WorkspaceIndexer {
     return config.sourceRootDirectory;
   }
 
+  private notifyIndexingStarted() {
+    this.connection.sendNotification(
+      "custom/indexingStatus",
+      "Indexing started."
+    );
+  }
+
+  private notifyIndexingFinished() {
+    this.connection.sendNotification(
+      "custom/indexingStatus",
+      "Indexing finished."
+    );
+  }
+
+  private notifyIndexingFailed() {
+    this.connection.sendNotification(
+      "custom/showErrorMessage",
+      "Indexing failed."
+    );
+  }
+
   public async run(): Promise<void> {
     const start = Date.now();
     try {
-      this.connection.sendNotification(
-        "custom/indexingStatus",
-        "Indexing started."
-      );
-
+      this.notifyIndexingStarted();
       const folders = await this.getFolders();
       const filePaths = await this.findPaths(folders);
 
@@ -61,16 +78,9 @@ export class WorkspaceIndexer {
           `Indexed file ${filePath} (${indexedFilesNumber}/${totalFilesNumber}) in ${formatted}.`
         );
       }
-
-      this.connection.sendNotification(
-        "custom/indexingStatus",
-        "Indexing finished."
-      );
+      this.notifyIndexingFinished();
     } catch (error) {
-      this.connection.sendNotification(
-        "custom/showErrorMessage",
-        "Indexing failed."
-      );
+      this.notifyIndexingFailed();
       throw error;
     }
   }
